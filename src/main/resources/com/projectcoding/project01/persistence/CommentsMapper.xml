@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.projectcoding.project01.persistence.CommentsMapper">
+   
+   <resultMap type="com.projectcoding.project01.domain.CommentsVO" id="commentsResultMap">
+      <id property="commentsId" column="COMMENTS_ID" /> 
+      <result property="boardId" column="BOARD_ID" /> 
+      <result property="memberId" column="MEMBER_ID" />
+      <result property="commentsContent" column="COMMENTS_CONTENT" />
+      <result property="commentsDateCreated" column="COMMENTS_DATE_CREATED" />
+   </resultMap>
+   
+   <insert id="insert">
+      INSERT INTO COMMENTS (COMMENTS_ID, BOARD_ID, MEMBER_ID, COMMENTS_CONTENT)
+      VALUES (COMMENTS_SEQ.NEXTVAL, #{boardId}, #{memberId}, #{commentsContent})
+   </insert>
+   
+   <select id="selectListByBoardId" resultMap="commentsResultMap">
+      SELECT * FROM COMMENTS
+      WHERE BOARD_ID = #{boardId}
+      ORDER BY COMMENTS_ID
+   </select>
+   
+   <update id="update">
+      UPDATE COMMENTS
+      SET COMMENTS_CONTENT = #{commentsContent}
+      WHERE COMMENTS_ID = #{commentsId}
+   </update>
+   
+   <delete id="delete">
+      DELETE FROM COMMENTS
+      WHERE COMMENTS_ID = #{commentsId}
+   </delete>
+   
+    
+</mapper>

@@ -15,7 +15,7 @@
 
 	<div style="text-align: center;">
 		<input type="text" id="memberId" >
-		<input type="text" id="commentsContent">
+		<input type="text" id="replyContent">
 		<button id="btnAdd">작성</button>
 	</div>
 
@@ -26,25 +26,25 @@
 
 	<script type="text/javascript">
 		$(document).ready(function(){
-			getAllComments(); // 함수 호출		
+			getAllReply(); // 함수 호출		
 			
 			// 댓글 작성 기능
 			$('#btnAdd').click(function(){
 				var boardId = $('#boardId').val(); // 게시판 번호 데이터
 				var memberId = $('#memberId').val(); // 작성자 데이터
-				var commentsContent = $('#commentsContent').val(); // 댓글 내용
+				var replyContent = $('#replyContent').val(); // 댓글 내용
 				// javascript 객체 생성
 				var obj = {
 						'boardId' : boardId,
 						'memberId' : memberId,
-						'commentsContent' : commentsContent
+						'replyContent' : replyContent
 				}
 				console.log(obj);
 				
 				// $.ajax로 송수신
 				$.ajax({
 					type : 'POST', // 메서드 타입
-					url : '../comments', // url
+					url : '../reply', // url
 					headers : { // 헤더 정보
 						'Content-Type' : 'application/json' // json content-type 설정 header를 설정하지 않으면 데이터 전송에 문제가 생긴다.
 					}, 
@@ -63,7 +63,7 @@
 			function getAllReply() {
 				var boardId = $('#boardId').val();
 				
-				var url = '../comments/all/' + boardId;
+				var url = '../reply/all/' + boardId;
 				$.getJSON(
 					url, 		
 					function(data) {
@@ -79,17 +79,17 @@
 							// this : 컬렉션의 각 인덱스 데이터를 의미
 							console.log(this);
 						  
-							// 전송된 commentsDateCreated는 문자열 형태이므로 날짜 형태로 변환이 필요
-							var commentsDateCreated = new Date(this.commentsDateCreated);
+							// 전송된 replyDateCreated는 문자열 형태이므로 날짜 형태로 변환이 필요
+							var replyDateCreated = new Date(this.replyDateCreated);
 
-							list += '<div class="comments_item">'
+							list += '<div class="reply_item">'
 								+ '<pre>'
-								+ '<input type="hidden" id="commentsId" value="'+ this.commentsId +'">'
+								+ '<input type="hidden" id="replyId" value="'+ this.replyId +'">'
 								+ this.memberId
 								+ '&nbsp;&nbsp;' // 공백
-								+ '<input type="text" id="commentsContent" value="'+ this.commentsContent +'">'
+								+ '<input type="text" id="replyContent" value="'+ this.replyContent +'">'
 								+ '&nbsp;&nbsp;'
-								+ commentsDateCreated
+								+ replyDateCreated
 								+ '&nbsp;&nbsp;'
 								+ '<button class="btn_update" >수정</button>'
 								+ '<button class="btn_delete" >삭제</button>'
@@ -97,50 +97,50 @@
 								+ '</div>';
 						}); // end each()
 							
-						$('#commentsList').html(list); // 저장된 데이터를 commentsList div 표현
+						$('#replies').html(list); // 저장된 데이터를 replies div 표현
 					} // end function()
 				); // end getJSON()
 			} // end getAllReply()
 			
 			// 수정 버튼을 클릭하면 선택된 댓글 수정
-			$('#commentsList').on('click', '.comments_item .btn_update', function(){
+			$('#replies').on('click', '.reply_item .btn_update', function(){
 				console.log(this);
 				
-				// 선택된 댓글의 commentsId, commentsContent 값을 저장
+				// 선택된 댓글의 replyId, replyContent 값을 저장
 				// prevAll() : 선택된 노드 이전에 있는 모든 형제 노드를 접근
-				var commentsId = $(this).prevAll('#commentsId').val();
-				var commentsContent = $(this).prevAll('#commentsContent').val();
-				console.log("선택된 댓글 번호 : " + commentsId + ", 댓글 내용 : " + commentsContent);
+				var replyId = $(this).prevAll('#replyId').val();
+				var replyContent = $(this).prevAll('#replyContent').val();
+				console.log("선택된 댓글 번호 : " + replyId + ", 댓글 내용 : " + replyContent);
 				
 				// ajax 요청
 				$.ajax({
 					type : 'PUT', 
-					url : '../comments/' + commentsId,
+					url : '../reply/' + replyId,
 					headers : {
 						'Content-Type' : 'application/json'
 					},
-					data : commentsContent, 
+					data : replyContent, 
 					success : function(result) {
 						console.log(result);
 						if(result == 1) {
 							alert('댓글 수정 성공!');
-							getAllComments();
+							getAllReply();
 						}
 					}
 				});
 				
-			}); // end commentsList.on()
+			}); // end replies.on()
 			
 			// 삭제 버튼을 클릭하면 선택된 댓글 삭제
-			$('#commentsList').on('click', '.comments_item .btn_delete', function(){
+			$('#replies').on('click', '.reply_item .btn_delete', function(){
 				console.log(this);
 				var boardId = $('#boardId').val(); // 게시판 번호 데이터
-				var commentsId = $(this).prevAll('#commentsId').val();
+				var replyId = $(this).prevAll('#replyId').val();
 				
 				// ajax 요청
 				$.ajax({
 					type : 'DELETE', 
-					url : '../comments/' + commentsId + '/' + boardId, 
+					url : '../reply/' + replyId + '/' + boardId, 
 					headers : {
 						'Content-Type' : 'application/json'
 					},
@@ -148,11 +148,11 @@
 						console.log(result);
 						if(result == 1) {
 							alert('댓글 삭제 성공!');
-							getAllComments();
+							getAllReply();
 						}
 					}
 				});
-			}); // end commentsList.on()		
+			}); // end replies.on()		
 
 		}); // end document()
 	</script>

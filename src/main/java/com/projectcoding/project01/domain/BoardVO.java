@@ -19,7 +19,7 @@ public class BoardVO {
 	private String boardContent;
 	private String memberId;
 	private Date boardDateCreated;
-	private int reply_Count;
+	private int reply_Count;	
 	private int tabId;
 	private String tabName;
 

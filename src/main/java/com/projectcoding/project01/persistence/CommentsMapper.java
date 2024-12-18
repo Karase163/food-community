@@ -16,5 +16,8 @@ public interface CommentsMapper {
 	int update(CommentsVO commentsVO);
 	
 	int delete(int commentsId);
+
+	int selectBoardIdByCommentId(int commentId);
+
 }
 

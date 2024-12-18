@@ -31,7 +31,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="boardContent" column="BOARD_CONTENT"/>
 		<result property="memberId" column="MEMBER_ID"/>
 		<result property="boardDateCreated" column="BOARD_DATE_CREATED"/>
-		<result property="replyCount" column="REPLY_COUNT"/>
+		<result property="commentsCount" column="COMMENTS_COUNT"/>
 		
 	</resultMap>
 	
@@ -95,9 +95,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT COUNT(*) TOTAL_COUNT FROM BOARD
 	</select>
 	
-	<update id="updateReplyCount">
+	<update id="updateCommentsCount">
 		UPDATE BOARD
-		SET REPLY_COUNT = REPLY_COUNT + #{amount}
+		SET COMMENTS_COUNT = COMMENTS_COUNT + #{amount}
 		WHERE BOARD_ID = #{boardId}
 	</update>
 	

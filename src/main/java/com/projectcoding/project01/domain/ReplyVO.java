@@ -15,11 +15,11 @@ import lombok.ToString;
 @ToString
 public class ReplyVO {
 
-    private int replyId;                    
-    private int commentsId;                  
-    private String memberId;                   
-    private String replyContent;            
-    private Date replyDateCreated;          
+	private int replyId; 
+	private int commentsId; 
+	private int boardId; 
+	private String replyContent; 
+	private String memberId;
+	private Date replyDateCreated;
 
-  
 }

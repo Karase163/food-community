@@ -15,7 +15,7 @@
 
 	<div style="text-align: center;">
 		<input type="text" id="memberId" >
-		<input type="text" id="replyContent">
+		<input type="text" id="commentsContent">
 		<button id="btnAdd">작성</button>
 	</div>
 
@@ -32,19 +32,19 @@
 			$('#btnAdd').click(function(){
 				var boardId = $('#boardId').val(); // 게시판 번호 데이터
 				var memberId = $('#memberId').val(); // 작성자 데이터
-				var replyContent = $('#replyContent').val(); // 댓글 내용
+				var replyContent = $('#commentsContent').val(); // 댓글 내용
 				// javascript 객체 생성
 				var obj = {
 						'boardId' : boardId,
 						'memberId' : memberId,
-						'replyContent' : replyContent
+						'commentsContent' : commentsContent
 				}
 				console.log(obj);
 				
 				// $.ajax로 송수신
 				$.ajax({
 					type : 'POST', // 메서드 타입
-					url : '../reply', // url
+					url : '../comments', // url
 					headers : { // 헤더 정보
 						'Content-Type' : 'application/json' // json content-type 설정 header를 설정하지 않으면 데이터 전송에 문제가 생긴다.
 					}, 
@@ -53,7 +53,7 @@
 						console.log(result);
 						if(result == 1) {
 							alert('댓글 입력 성공');
-							getAllReply(); // 함수 호출		
+							getAllComments(); // 함수 호출		
 						}
 					}
 				});

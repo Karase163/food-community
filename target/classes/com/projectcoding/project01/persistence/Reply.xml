@@ -7,14 +7,15 @@
     <resultMap type="com.projectcoding.project01.domain.ReplyVO" id="replyResultMap">
         <id property="replyId" column="REPLY_ID" />
         <result property="commentId" column="COMMENTS_ID" />
-        <result property="memberId" column="MEMBER_ID" />
+        <result property="boardId" column="BOARD_ID" />
         <result property="replyContent" column="REPLY_CONTENT" />
+        <result property="memberId" column="MEMBER_ID" />
         <result property="replyDateCreated" column="REPLY_DATE_CREATED" />
     </resultMap>
 
     <insert id="insert">
-        INSERT INTO REPLY (REPLY_ID, COMMENTS_ID, MEMBER_ID, REPLY_CONTENT, REPLY_DATE_CREATED)
-        VALUES (REPLY_SEQ.NEXTVAL, #{commentsId}, #{memberId}, #{replyContent}, CURRENT_TIMESTAMP)
+        INSERT INTO REPLY (REPLY_ID, COMMENTS_ID, BOARD_ID, MEMBER_ID, REPLY_CONTENT, REPLY_DATE_CREATED)
+        VALUES (REPLY_SEQ.NEXTVAL, #{commentsId}, #{boardId} #{memberId}, #{replyContent}, CURRENT_TIMESTAMP)
     </insert>
 
     <select id="selectListByCommentsId" resultMap="replyResultMap">
@@ -31,7 +32,13 @@
 
     <delete id="delete">
         DELETE FROM REPLY
-        WHERE REPLY_ID = #{replyId}
+        WHERE REPLY_ID = #{replyId}	
     </delete>
+    
+    <update id="updateReplyCount">
+        UPDATE BOARD
+        SET REPLY_COUNT = REPLY_COUNT + #{count}
+        WHERE BOARD_ID = #{boardId}
+    </update>
 
 </mapper>

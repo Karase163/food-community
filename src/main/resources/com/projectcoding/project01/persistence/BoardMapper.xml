@@ -101,4 +101,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE BOARD_ID = #{boardId}
 	</update>
 	
+	<update id="updateReplyCount">
+    	UPDATE BOARD
+    	SET REPLY_COUNT = REPLY_COUNT + #{amount}
+    	WHERE BOARD_ID = #{boardId}
+	</update>
+	
+	
+	
 </mapper>

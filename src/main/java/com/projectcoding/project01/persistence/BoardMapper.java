@@ -22,8 +22,8 @@ public interface BoardMapper {
 	int delete(int boardId); // 상세 게시글 삭제
 	
 	int updateCommentsCount(@Param("boardId") int boardId,@Param("amount") int amount); // 댓글 수 변경
-	//이거 vo에 getAmount 넣으면 되지 않나? 아닌감 | 결론 애매하다. 이에 대한 객체와 getter메소드를 만들어야 하는데 굳이 그럴 필요 없이 @Param으로 xml에서 인식하게 할 수 있기 때문
-	//사용 조건은 vo객체 혹은 단독 매개변수가 아닌 경우에 사용한다.
-	// @Param : 자바 객체의 속성을 mapper에 매핑
+	
+	int updateReplyCount(@Param("boardId") int boardId, @Param("amount") int amount); // 답글 수 변경
+	
 	
 }

@@ -34,21 +34,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="commentsCount" column="COMMENTS_COUNT"/>
 		
 	</resultMap>
-	
-	<!-- 
-		<select>, <insert>, <update>, <delete> : SQL 쿼리 정의 태그
-		- 속성 :
-		id : Mapper 인터페이스 메소드 매핑 역할. (인터페이스 메소드와 이름이 같아야 연결이 된다.)
-		
-		resultMap : 쿼리 결과를 resultMap에 매핑. /주로 select에 사용 (쿼리의 결과 값을 저장 이전의 ResultSet의 역할을 맡는다.)
-			<resultMap>태그에 id를 적용
-			
-		resultType : 쿼리 결과를 클래스에 매핑. /주로 select에 사용 
-	 -->
-	 
-	 <!-- 
-	 	#{변수명} : Mapper 인터페이스 메소드 매개변수와 매핑되어 전송된 데이터를 적용
-	  -->
 	 
 	<insert id="insert">
 		INSERT INTO BOARD VALUES(BOARD_ID, BOARD_TITLE, BOARD_CONTENTE, MEMBER_ID)
@@ -75,25 +60,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 상세 게시글 삭제 -->
 		DELETE BOARD WHERE BOARD_ID = #{boardId}
 	</delete>
-	
-	<!-- <select>에 resultMap을 반드시 넣어줘야 한다.  -->
-	<select id="selectListByPagination" resultMap="boardResultMap">
-		SELECT * FROM
-		(
-			SELECT ROW_NUMBER() OVER(ORDER BY BOARD_ID DESC)
-			AS RN, BOARD.* FROM BOARD
-		)
-		WHERE RN BETWEEN #{start} AND #{end}
-	</select>
-	<!-- 
-		#{start} : pagination 객체의 getStart()
-		#{end} : pagination 객체의 getEnd()
-	 -->
-	 
-	<!-- resulType : 쿼리 결과를 자바 객체에 매핑하기 위해 사용 -->
-	<select id="selectTotalCount" resultType="Integer">
-		SELECT COUNT(*) TOTAL_COUNT FROM BOARD
-	</select>
 	
 	<update id="updateCommentsCount">
 		UPDATE BOARD

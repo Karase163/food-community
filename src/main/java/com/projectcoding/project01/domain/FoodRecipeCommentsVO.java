@@ -13,13 +13,11 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class ReplyVO {
-
-	private int replyId; 
-	private int commentsId; 
-	private int boardId; 
-	private String replyContent; 
-	private String memberId;
-	private Date replyDateCreated;
+public class FoodRecipeCommentsVO {
+	private int foodrecipecommentsId;
+	private int foodrecipeboardId;
+	private String foodrecipememberId;
+	private String foodrecipecommentsContent;
+	private Date foodrecipecommentsCreated;
 
 }

@@ -14,8 +14,8 @@
     </resultMap>
 
     <insert id="insert">
-        INSERT INTO REPLY (REPLY_ID, COMMENTS_ID, BOARD_ID, MEMBER_ID, REPLY_CONTENT, REPLY_DATE_CREATED)
-        VALUES (REPLY_SEQ.NEXTVAL, #{commentsId}, #{boardId} #{memberId}, #{replyContent}, CURRENT_TIMESTAMP)
+        INSERT INTO REPLY (REPLY_ID, COMMENTS_ID, BOARD_ID, MEMBER_ID, REPLY_CONTENT)
+        VALUES (REPLY_SEQ.NEXTVAL, #{commentsId}, #{boardId}, #{memberId}, #{replyContent})
     </insert>
 
     <select id="selectListByCommentsId" resultMap="replyResultMap">

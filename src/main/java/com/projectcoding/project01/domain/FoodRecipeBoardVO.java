@@ -13,14 +13,10 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class BoardVO {
-	private int boardId;
-	private String boardTitle;
-	private String boardContent;
+public class FoodRecipeBoardVO {
+	private int foodrecipeboardId;
+	private String foodrecipeboardTitle;
+	private String foodrecipeboardContent;
 	private String memberId;
-	private Date boardDateCreated;
-	private int reply_Count;	
-	private int tabId;
-	private String tabName;
-
+	private Date foodrecipeboardCreated;
 }

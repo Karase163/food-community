@@ -6,15 +6,14 @@ import java.util.List;
 
 @Mapper
 public interface FoodRecipeReplyMapper {
-    
-    int insert(FoodRecipeReplyVO foodrecipereplyVo);
-    
-    List<FoodRecipeReplyVO> selectListByCommentsId(int foodrecipecommentsId);
-    
-    int update(FoodRecipeReplyVO foodrecipereplyVO);
-    
-    int delete(int foodrecipereplyId);
 
-    List<FoodRecipeReplyVO> selectRepliesByBoardId(int foodrecipeboardId);
+    int insert(FoodRecipeReplyVO foodRecipeReplyVO); 
+    
+    List<FoodRecipeReplyVO> selectListByCommentsId(int foodRecipeCommentsId); 
+    int update(FoodRecipeReplyVO foodRecipeReplyVO); 
+    
+    int delete(int foodRecipeReplyId); 
+
+    List<FoodRecipeReplyVO> selectRepliesByBoardId(int foodRecipeBoardId);
     
 }

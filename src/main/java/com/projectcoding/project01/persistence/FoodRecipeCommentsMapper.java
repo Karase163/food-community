@@ -8,16 +8,18 @@ import com.projectcoding.project01.domain.FoodRecipeCommentsVO;
 
 @Mapper
 public interface FoodRecipeCommentsMapper {
-	
-	int insert(FoodRecipeCommentsVO foodrecipecommentsVO);
-	
-	List<FoodRecipeCommentsVO> selectListByBoardId(int foodrecipeboardId);
-	
-	int update(FoodRecipeCommentsVO foodrecipecommentsVO);
-	
-	int delete(int foodrecipecommentsId);
 
-	
-
+    int insert(FoodRecipeCommentsVO foodRecipeCommentsVO); 
+    
+    List<FoodRecipeCommentsVO> selectListByBoardId(int foodRecipeBoardId);
+    
+    int update(FoodRecipeCommentsVO foodRecipeCommentsVO);
+    
+    int delete(int foodRecipeCommentsId); 
 }
+
+	
+
+
+
 

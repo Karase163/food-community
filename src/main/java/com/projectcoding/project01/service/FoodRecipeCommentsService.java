@@ -5,13 +5,14 @@ import java.util.List;
 import com.projectcoding.project01.domain.FoodRecipeCommentsVO;
 
 public interface FoodRecipeCommentsService {
-	
-	int createComments(FoodRecipeCommentsVO foodrecipecommentsVO);
-	
-	List<FoodRecipeCommentsVO> getAllComments(int foodrecipeboardId);
-	
-	int updateComments(int foodrecipecommentsId, String foodrecipecommentsContent);
-	
-	int deleteComments(int foodrecipecommentsId, int foodrecipeboardId);
+
+    int createComments(FoodRecipeCommentsVO foodRecipeCommentsVO);
+
+    List<FoodRecipeCommentsVO> getAllComments(int foodRecipeBoardId); 
+
+    int updateComments(int foodRecipeCommentsId, String foodRecipeCommentsContent); 
+
+    int deleteComments(int foodRecipeCommentsId, int foodRecipeBoardId); 
 }
+
 

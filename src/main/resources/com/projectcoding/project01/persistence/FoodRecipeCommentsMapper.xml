@@ -10,7 +10,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       <result property="boardId" column="BOARD_ID" /> 
       <result property="memberId" column="MEMBER_ID" />
       <result property="commentsContent" column="COMMENTS_CONTENT" />
-      <result property="commentsDateCreated" column="COMMENTS_DATE_CREATED" />
+      <result property="commentsCreated" column="COMMENTS_CREATED" />
    </resultMap>
    
    <insert id="insert">
@@ -35,7 +35,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       WHERE COMMENTS_ID = #{commentsId}
    </delete>
    
+   <update id="updateCommentsCount">
+		UPDATE FOOD_RECIPE_BOARD
+		SET FOOD_RECIPE_COMMENTS_COUNT = FOOD_RECIPE_COMMENTS_COUNT + #{amount}
+		WHERE FOOD_RECIPE_BOARD_ID = #{foodRecipeBoardId}
+	</update>
 
-   
-   
 </mapper>

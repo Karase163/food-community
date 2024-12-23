@@ -17,39 +17,39 @@ import lombok.extern.log4j.Log4j;
 public class FoodRecipeCommentsServiceImple implements FoodRecipeCommentsService {
 	
 	@Autowired
-	private FoodRecipeCommentsMapper foodrecipecommentsMapper;
+	private FoodRecipeCommentsMapper foodRecipeCommentsMapper;
 	
 	@Autowired
-	private FoodRecipeBoardMapper foodrecipeboardMapper;
+	private FoodRecipeBoardMapper foodRecipeBoardMapper;
 	
-	@Transactional(value = "transactionaManager")
+	@Transactional(value = "transactionManager")
 	
 	@Override
-	public int createComments(FoodRecipeCommentsVO foodrecipecommentsVO) {
+	public int createComments(FoodRecipeCommentsVO foodRecipeCommentsVO) {
 		log.info("createComments()");
-		
-		int insertResult = foodrecipecommentsMapper.insert(foodrecipecommentsVO);
+					
+		int insertResult = foodRecipeCommentsMapper.insert(foodRecipeCommentsVO);
 		log.info(insertResult + "행 댓글 추가");
 		
-		int updateResult = foodrecipeboardMapper.updateCommentsCount(foodrecipecommentsVO.getFoodrecipeboardId(),1);
+		int updateResult = foodRecipeBoardMapper.updateCommentsCount(foodRecipeCommentsVO.getFoodRecipeBoardId(), 1);
 		log.info(updateResult + "행 게시판 댓글 수 수정");
 		return 1;
 	}
 
 	@Override
-	public List<FoodRecipeCommentsVO> getAllComments(int foodrecipeboardId) {
+	public List<FoodRecipeCommentsVO> getAllComments(int foodRecipeBoardId) {
 		log.info("getAllComments()");
-		List<FoodRecipeCommentsVO> list = foodrecipecommentsMapper.selectListByBoardId(foodrecipeboardId);
+		List<FoodRecipeCommentsVO> list = foodRecipeCommentsMapper.selectListByBoardId(foodRecipeBoardId);
 		return list;
 	}
 
 	@Override
-	public int updateComments(int foodrecipecommentsId, String foodrecipecommentsContent) {
+	public int updateComments(int foodRecipeCommentsId, String foodRecipeCommentsContent) {
 		log.info("updateComments()");
 		FoodRecipeCommentsVO commentsVO = new FoodRecipeCommentsVO();
-		commentsVO.setFoodrecipecommentsId(foodrecipecommentsId);
-		commentsVO.setFoodrecipecommentsContent(foodrecipecommentsContent);
-		int updateResult = foodrecipecommentsMapper.update(commentsVO);
+		commentsVO.setFoodRecipeCommentsId(foodRecipeCommentsId);
+		commentsVO.setFoodRecipeCommentsContent(foodRecipeCommentsContent);
+		int updateResult = foodRecipeCommentsMapper.update(commentsVO);
 		return updateResult;
 	}
 	
@@ -57,12 +57,11 @@ public class FoodRecipeCommentsServiceImple implements FoodRecipeCommentsService
 	@Override
 	public int deleteComments(int commentsId, int boardId) {
 		log.info("deleteComments()");
-		int deleteResult = foodrecipecommentsMapper.delete(commentsId);
+		int deleteResult = foodRecipeCommentsMapper.delete(commentsId);
 		
 		log.info(deleteResult + " 행 댓글 삭제");
-		int updateResult = foodrecipeboardMapper.updateCommentsCount(boardId, -1);
+		int updateResult = foodRecipeBoardMapper.updateCommentsCount(boardId, -1);
 		log.info(updateResult + "행 게시판 댓글 수 수정");
 		return 1;
 	}
-
 }

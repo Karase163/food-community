@@ -15,11 +15,10 @@ import lombok.ToString;
 @ToString
 public class FoodRecipeReplyVO {
 
-	private int foodrecipereplyId; 
-	private int foodrecipecommentsId; 
-	private int foodrecipeboardId; 
-	private String foodrecipereplyContent; 
-	private String foodrecipememberId;
-	private Date foodrecipereplyDateCreated;
-
+    private int foodRecipeReplyId; 
+    private int foodRecipeCommentsId; 
+    private int foodRecipeBoardId; 
+    private String foodRecipeReplyContent; 
+    private String foodRecipeMemberId;
+    private Date foodRecipeReplyDateCreated;
 }

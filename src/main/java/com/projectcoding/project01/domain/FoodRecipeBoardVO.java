@@ -14,9 +14,11 @@ import lombok.ToString;
 @Setter
 @ToString
 public class FoodRecipeBoardVO {
-	private int foodrecipeboardId;
-	private String foodrecipeboardTitle;
-	private String foodrecipeboardContent;
-	private String memberId;
-	private Date foodrecipeboardCreated;
+    private int foodRecipeBoardId;
+    private String foodRecipeBoardTitle;
+    private String foodRecipeBoardContent;
+    private String memberId;
+    private Date foodRecipeBoardCreated;
+    private int foodRecipeCommentsCount;
+    private int foodRecipeReplyCount;
 }

@@ -14,43 +14,43 @@ import lombok.extern.log4j.Log4j;
 
 @Service
 @Log4j
-public class FoodRecipeReplySreviceImple implements FoodRecipeReplyService {
+public class FoodRecipeReplyServiceImple implements FoodRecipeReplyService {
 
     @Autowired
-    private FoodRecipeReplyMapper replyMapper;
+    private FoodRecipeReplyMapper foodRecipeReplyMapper;
 
     @Autowired
-    private FoodRecipeBoardMapper boardMapper;
+    private FoodRecipeBoardMapper foodRecipeBoardMapper;
 
     @Transactional(value = "transactionManager")
     @Override
-    public int createReply(FoodRecipeReplyVO foodrecipereplyVO) {
+    public int createReply(FoodRecipeReplyVO foodRecipeReplyVO) {
         log.info("createReply()");
         
-        int insertResult = replyMapper.insert(foodrecipereplyVO);
+        int insertResult = foodRecipeReplyMapper.insert(foodRecipeReplyVO);
         log.info(insertResult + "행 답글 추가");
         
-        int updateResult = boardMapper.updateReplyCount(foodrecipereplyVO.getFoodrecipeboardId(), 1);
+        int updateResult = foodRecipeBoardMapper.updateReplyCount(foodRecipeReplyVO.getFoodRecipeBoardId(), 1);
         log.info(updateResult + "행 게시판 답글 수 수정");
         return 1; 
     }
 
     @Override
-    public List<FoodRecipeReplyVO> getAllReply(int commentsId) {
+    public List<FoodRecipeReplyVO> getAllReply(int foodRecipeCommentsId) {
         log.info("getAllReplies()");
-        List<FoodRecipeReplyVO> list = replyMapper.selectListByCommentsId(commentsId);
+        List<FoodRecipeReplyVO> list = foodRecipeReplyMapper.selectListByCommentsId(foodRecipeCommentsId);
         return list;
     }
     
     @Override
-    public int updateReply(int replyId, String replyContent) {
+    public int updateReply(int foodRecipeReplyId, String foodRecipeReplyContent) {
         log.info("updateReply()");
         
         FoodRecipeReplyVO replyVO = new FoodRecipeReplyVO();
-        replyVO.setReplyId(replyId);
-        replyVO.setReplyContent(replyContent);
+        replyVO.setFoodRecipeReplyId(foodRecipeReplyId);
+        replyVO.setFoodRecipeReplyContent(foodRecipeReplyContent);
         
-        int updateResult = replyMapper.update(replyVO);
+        int updateResult = foodRecipeReplyMapper.update(replyVO);
         return updateResult; 
     }
 
@@ -59,9 +59,9 @@ public class FoodRecipeReplySreviceImple implements FoodRecipeReplyService {
     public int deleteReply(int replyId, int boardId) {
         log.info("deleteReply()");
         
-        int deleteResult = replyMapper.delete(replyId);
+        int deleteResult = foodRecipeReplyMapper.delete(replyId);
         log.info(deleteResult + "행 답글 삭제");
-        int updateResult = boardMapper.updateReplyCount(boardId, -1);
+        int updateResult = foodRecipeBoardMapper.updateReplyCount(boardId, -1);
         log.info(updateResult + "행 게시판 답글 수 수정");
         
         return 1; 

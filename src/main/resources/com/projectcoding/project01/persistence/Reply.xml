@@ -10,7 +10,7 @@
         <result property="boardId" column="BOARD_ID" />
         <result property="replyContent" column="REPLY_CONTENT" />
         <result property="memberId" column="MEMBER_ID" />
-        <result property="replyDateCreated" column="REPLY_DATE_CREATED" />
+        <result property="replyCreated" column="REPLY_CREATED" />
     </resultMap>
 
     <insert id="insert">

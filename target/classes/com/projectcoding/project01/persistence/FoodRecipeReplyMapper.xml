@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.projectcoding.project01.persistence.FoodRecipeReplyMapper">
+
+    <resultMap type="com.projectcoding.project01.domain.FoodRecipeReplyVO" id="foodRecipeReplyResultMap">
+        <id property="foodRecipeReplyId" column="FOOD_RECIPE_REPLY_ID" />
+        <result property="foodRecipeCommentId" column="FOOD_RECIPE_COMMENTS_ID" />
+        <result property="foodRecipeBoardId" column="FOOD_RECIPE_BOARD_ID" />
+        <result property="foodRecipeReplyContent" column="FOOD_RECIPE_REPLY_CONTENT" />
+        <result property="memberId" column="MEMBER_ID" />
+        <result property="foodRecipeReplyCreated" column="FOOD_RECIPE_REPLY_CREATED" />
+    </resultMap>
+
+    <insert id="insert">
+        INSERT INTO REPLY (FOOD_RECIPE_REPLY_ID, FOOD_RECIPE_COMMENTS_ID, FOOD_RECIPE_BOARD_ID, MEMBER_ID, REPLY_CONTENT)
+        VALUES (REPLY_SEQ.NEXTVAL, #{foodRecipeCommentsId}, #{foodRecipeBoardId}, #{memberId}, #{foodRecipeReplyContent})
+    </insert>
+
+    <select id="selectListByCommentsId" resultMap="foodRecipeReplyResultMap">
+        SELECT * FROM FOOD_RECIPE_REPLY
+        WHERE FOOD_RECIPE_COMMENTS_ID = #{foodRecipeCommentsId}
+        ORDER BY FOOD_RECIPE_REPLY_ID
+    </select>
+
+    <update id="update">
+        UPDATE FOOD_RECIPE_REPLY
+        SET FOOD_RECIPE_REPLY_CONTENT = #{foodRecipeReplyContent}
+        WHERE FOOD_RECIPE_REPLY_ID = #{foodRecipeReplyId}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM FOOD_RECIPE_REPLY
+        WHERE FOOD_RECIPE_REPLY_ID = #{foodRecipeReplyId}	
+    </delete>
+    
+
+</mapper>

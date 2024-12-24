@@ -23,20 +23,21 @@ public class FoodRecipeReplyServiceImple implements FoodRecipeReplyService {
     private FoodRecipeBoardMapper foodRecipeBoardMapper;
 
     @Transactional(value = "transactionManager")
+
     @Override
     public int createReply(FoodRecipeReplyVO foodRecipeReplyVO) {
         log.info("createReply()");
         
-        int insertResult = foodRecipeReplyMapper.insert(foodRecipeReplyVO);
-        log.info(insertResult + "행 답글 추가");
+        int insertReplyResult = foodRecipeReplyMapper.insert(foodRecipeReplyVO);
+        log.info(insertReplyResult + "행 답글 추가");
         
-        int updateResult = foodRecipeBoardMapper.updateReplyCount(foodRecipeReplyVO.getFoodRecipeBoardId(), 1);
-        log.info(updateResult + "행 게시판 답글 수 수정");
+        int updateReplyCountResult = foodRecipeBoardMapper.updateReplyCount(foodRecipeReplyVO.getFoodRecipeBoardId(), 1); // 수정: 변수명 변경
+        log.info(updateReplyCountResult + "행 게시판 답글 수 수정");
         return 1; 
     }
 
     @Override
-    public List<FoodRecipeReplyVO> getAllReply(int foodRecipeCommentsId) {
+    public List<FoodRecipeReplyVO> getAllReplies(int foodRecipeCommentsId) {
         log.info("getAllReplies()");
         List<FoodRecipeReplyVO> list = foodRecipeReplyMapper.selectListByCommentsId(foodRecipeCommentsId);
         return list;
@@ -50,8 +51,8 @@ public class FoodRecipeReplyServiceImple implements FoodRecipeReplyService {
         replyVO.setFoodRecipeReplyId(foodRecipeReplyId);
         replyVO.setFoodRecipeReplyContent(foodRecipeReplyContent);
         
-        int updateResult = foodRecipeReplyMapper.update(replyVO);
-        return updateResult; 
+        int updateReplyResult = foodRecipeReplyMapper.update(replyVO);
+        return updateReplyResult; 
     }
 
     @Transactional(value = "transactionManager")
@@ -59,10 +60,10 @@ public class FoodRecipeReplyServiceImple implements FoodRecipeReplyService {
     public int deleteReply(int replyId, int boardId) {
         log.info("deleteReply()");
         
-        int deleteResult = foodRecipeReplyMapper.delete(replyId);
-        log.info(deleteResult + "행 답글 삭제");
-        int updateResult = foodRecipeBoardMapper.updateReplyCount(boardId, -1);
-        log.info(updateResult + "행 게시판 답글 수 수정");
+        int deleteReplyResult = foodRecipeReplyMapper.delete(replyId);
+        log.info(deleteReplyResult + "행 답글 삭제");
+        int updateReplyCountResult = foodRecipeBoardMapper.updateReplyCount(boardId, -1);
+        log.info(updateReplyCountResult + "행 게시판 답글 수 수정");
         
         return 1; 
     }

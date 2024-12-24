@@ -6,14 +6,11 @@ import com.projectcoding.project01.domain.FoodRecipeReplyVO;
 
 public interface FoodRecipeReplyService {
 	
-	int createReply(FoodRecipeReplyVO foodrecipereplyVO);
+	int createReply(FoodRecipeReplyVO foodRecipeReplyVO); 
 	
-	List<FoodRecipeReplyVO> getAllReply(int foodrecipecommentsId);
+	List<FoodRecipeReplyVO> getAllReplies(int foodRecipeCommentsId); 
 	
-	int updateReply(int foodrecipereplyId, String foodrecipereplyContent);
+	int updateReply(int foodRecipeReplyId, String foodRecipeReplyContent); 
 	
-	int deleteReply(int foodrecipereplyId, int foodrecipecommentsId);
+	int deleteReply(int foodRecipeReplyId, int foodRecipeCommentsId); 
 }
- 
-
-

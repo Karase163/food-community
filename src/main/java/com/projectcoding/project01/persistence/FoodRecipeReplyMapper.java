@@ -9,7 +9,8 @@ public interface FoodRecipeReplyMapper {
 
     int insert(FoodRecipeReplyVO foodRecipeReplyVO); 
     
-    List<FoodRecipeReplyVO> selectListByCommentsId(int foodRecipeCommentsId); 
+    List<FoodRecipeReplyVO> selectListByCommentsId(int foodRecipeCommentsId);
+    
     int update(FoodRecipeReplyVO foodRecipeReplyVO); 
     
     int delete(int foodRecipeReplyId); 

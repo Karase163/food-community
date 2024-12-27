@@ -57,12 +57,12 @@ public class FoodRecipeReplyServiceImple implements FoodRecipeReplyService {
 
     @Transactional(value = "transactionManager")
     @Override
-    public int deleteReply(int replyId, int boardId) {
+    public int deleteReply(int foodRecipeReplyId, int foodRecipeBoardId) {
         log.info("deleteReply()");
         
-        int deleteReplyResult = foodRecipeReplyMapper.delete(replyId);
+        int deleteReplyResult = foodRecipeReplyMapper.delete(foodRecipeReplyId);
         log.info(deleteReplyResult + "행 답글 삭제");
-        int updateReplyCountResult = foodRecipeBoardMapper.updateReplyCount(boardId, -1);
+        int updateReplyCountResult = foodRecipeBoardMapper.updateReplyCount(foodRecipeBoardId, -1);
         log.info(updateReplyCountResult + "행 게시판 답글 수 수정");
         
         return 1; 

@@ -55,12 +55,12 @@ public class FoodRecipeCommentsServiceImple implements FoodRecipeCommentsService
 	
 	@Transactional(value = "transactionManager")
 	@Override
-	public int deleteComments(int commentsId, int boardId) {
+	public int deleteComments(int foodRecipeCommentsId, int foodRecipeBoardId) {
 		log.info("deleteComments()");
-		int deleteResult = foodRecipeCommentsMapper.delete(commentsId);
+		int deleteResult = foodRecipeCommentsMapper.delete(foodRecipeCommentsId);
 		
 		log.info(deleteResult + " 행 댓글 삭제");
-		int updateResult = foodRecipeBoardMapper.updateCommentsCount(boardId, -1);
+		int updateResult = foodRecipeBoardMapper.updateCommentsCount(foodRecipeBoardId, -1);
 		log.info(updateResult + "행 게시판 댓글 수 수정");
 		return 1;
 	}

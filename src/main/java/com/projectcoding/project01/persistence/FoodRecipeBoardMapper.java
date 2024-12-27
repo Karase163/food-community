@@ -22,8 +22,6 @@ public interface FoodRecipeBoardMapper {
 
 	int updateReplyCount(@Param("foodRecipeBoardId") int boardId, @Param("amount") int amount); // 답글 수 변경
 
-	
-	
 }
 
 

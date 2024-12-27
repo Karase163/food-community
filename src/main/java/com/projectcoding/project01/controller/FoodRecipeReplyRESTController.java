@@ -19,11 +19,6 @@ import com.projectcoding.project01.service.FoodRecipeReplyService;
 
 import lombok.extern.log4j.Log4j;
 
-// * RESTful url과 의미
-// /foodRecipeComments (POST)		 : 음식 레시피 댓글 추가(insert)
-// /foodRecipeComments/all/숫자 (GET) 	 : 해당 레시피 번호(boardId)의 모든 댓글 검색(select)
-// /foodRecipeComments/숫자 (PUT)		 : 해당 댓글 번호(replyId)의 내용을 수정(update)
-// /foodRecipeComments/숫자 (DELETE)	 : 해당 댓글 번호(replyId)의 내용을 삭제(delete)
 
 // 비동기 방식이기 때문에 JSON 사용을 위한 @RestController 사용
 @RestController // @Responsebody와 @Requestbody를 사용해서 JSON데이터의 변환을 자동으로 해주는 언노테이션

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,14 +13,14 @@
 	<input type="hidden" id="foodRecipeBoardId" value="3">
 
 	<div style="text-align: center;">
-		<input type="text" id="memberId" >
-		<input type="text" id="foodRecipeCommentContent">
+		<input type="text" id="memberId"> <input type="text"
+			id="foodRecipeCommentsContent">
 		<button id="btnAdd">작성</button>
 	</div>
 
 	<hr>
 	<div style="text-align: center;">
-		<div id="foodRecipeCommentsList"></div> <!-- 복수형으로 변경 -->
+		<div id="foodRecipeCommentsList"></div>
 	</div>
 
 	<script type="text/javascript">
@@ -43,7 +43,7 @@
 				// 서버로 댓글을 전송하는 ajax 요청
 				$.ajax({
 					type : 'POST', // HTTP 메소드: POST
-					url : '../foodRecipeCommentsList', // 댓글 작성 URL (복수형)
+					url : '../foodRecipeCommentsList', // 댓글 작성 URL
 					headers : { // JSON 형태로 데이터를 보내기 위한 헤더 설정
 						'Content-Type' : 'application/json' 
 					}, 
@@ -62,7 +62,7 @@
 			function getAllFoodRecipeComments() {
 				var boardId = $('#foodRecipeBoardId').val(); // 게시판 ID
 				
-				var url = '../foodRecipeCommentsList/all/' + foodRecipeBoardId; // 댓글 목록을 가져올 URL (복수형)
+				var url = '../foodRecipeCommentsList/all/' + foodRecipeBoardId; // 댓글 목록을 가져올 URL 
 				$.getJSON(
 					url, 		
 					function(data) {
@@ -74,16 +74,16 @@
 						// 각 댓글에 대해 반복하며 HTML 요소를 생성
 						$(data).each(function(){
 							// 댓글 작성 시간 문자열을 Date 객체로 변환
-							var foodRecipeCommentDateCreated = new Date(this.foodRecipeCommentDateCreated);
+							var foodRecipeCommentsDateCreated = new Date(this.foodRecipeCommentsDateCreated);
 
-							list += '<div class="foodRecipeComment_item" id="comment_' + this.foodRecipeCommentId + '">'
+							list += '<div class="foodRecipeComments_item">'
 								+ '<pre>'
-								+ '<input type="hidden" id="foodRecipeCommentId" value="'+ this.foodRecipeCommentId +'">'
+								+ '<input type="hidden" id="foodRecipeCommentsId" value="'+ this.foodRecipeCommentsId +'">'
 								+ this.memberId
 								+ '&nbsp;&nbsp;' 
-								+ '<input type="text" id="foodRecipeCommentContent" value="'+ this.foodRecipeCommentContent +'">'
+								+ '<input type="text" id="foodRecipeCommentsContent" value="'+ this.foodRecipeCommentsContent +'">'
 								+ '&nbsp;&nbsp;'
-								+ foodRecipeCommentDateCreated
+								+ foodRecipeCommentsDateCreated
 								+ '&nbsp;&nbsp;'
 								+ '<button class="btn_update">수정</button>'
 								+ '<button class="btn_delete">삭제</button>'
@@ -97,7 +97,7 @@
 							if (this.replies) {
 								$(this.replies).each(function() {
 									list += '<div class="reply_item">'
-										+ this.memberId + ' : ' + this.foodRecipeCommentContent
+										+ this.memberId + ' : ' + this.foodRecipeCommentsContent
 										+ '&nbsp;&nbsp;<button class="btn_reply_update">수정</button>'
 										+ '&nbsp;&nbsp;<button class="btn_reply_delete">삭제</button>'
 										+ '</div>';
@@ -105,24 +105,27 @@
 							}
 						});
 						
-						$('#foodRecipeCommentslist').html(list); // HTML에 댓글 목록을 삽입
+						$('#foodRecipeCommentsList').html(list); // HTML에 댓글 목록을 삽입
 					}
 				); 
 			} 
 			
 			// 댓글 수정 기능
-			$('#foodRecipeCommentslist').on('click', '.foodRecipeComment_item .btn_update', function(){
-				var foodRecipeCommentId = $(this).prevAll('#foodRecipeCommentId').val(); // 댓글 ID
-				var foodRecipeCommentContent = $(this).prevAll('#foodRecipeCommentContent').val(); // 댓글 내용
-				
+			$('#foodRecipeCommentsList').on('click', '.foodRecipeComments_item .btn_update', function(){
+				console.log(this);
+
+				var foodRecipeCommentsId = $(this).prevAll('#foodRecipeCommentsId').val(); // 댓글 ID
+				var foodRecipeCommentsContent = $(this).prevAll('#foodRecipeCommentsContent').val(); // 댓글 내용
+				console.log("선택된 댓글 번호 : " + foodRecipeCommentsId + ", 댓글 내용 : " + foodRecipeCommentsContent);
+
 				// 댓글 수정 요청
 				$.ajax({
 					type : 'PUT', 
-					url : '../foodRecipeComments/' + foodRecipeCommentId, // 수정 URL (복수형)
+					url : '../foodRecipeComments/' + foodRecipeCommentsId, // 수정 URL 
 					headers : {
 						'Content-Type' : 'application/json'
 					},
-					data : foodRecipeCommentContent, 
+					data : foodRecipeCommentsContent, 
 					success : function(result) {
 						if(result == 1) {
 							alert('댓글 수정 성공!');
@@ -133,14 +136,16 @@
 			}); 
 			
 			// 댓글 삭제 기능
-			$('#foodRecipeCommentslist').on('click', '.foodRecipeComment_item .btn_delete', function(){
+			$('#foodRecipeCommentsList').on('click', '.foodRecipeComments_item .btn_delete', function(){
+				console.log(this);
+
 				var boardId = $('#boardId').val(); 
-				var foodRecipeCommentId = $(this).prevAll('#foodRecipeCommentId').val(); // 삭제할 댓글 ID
+				var foodRecipeCommentId = $(this).prevAll('#foodRecipeCommentsId').val(); // 삭제할 댓글 ID
 				
 				// 댓글 삭제 요청
 				$.ajax({
 					type : 'DELETE', 
-					url : '../foodRecipeComments/' + foodRecipeCommentId + '/' + boardId, // 삭제 URL (복수형)
+					url : '../foodRecipeCommentsList/' + foodRecipeCommentsId + '/' + boardId, // 삭제 URL 
 					headers : {
 						'Content-Type' : 'application/json'
 					},
@@ -154,23 +159,24 @@
 			}); 
 
 			// 답글 작성 기능
-			$('#foodRecipeCommentslist').on('click', '.foodRecipeComment_item .btn_reply', function(){
-				var parentCommentId = $(this).closest('.foodRecipeComment_item').find('#foodRecipeCommentId').val(); // 부모 댓글 ID
+			$('#foodRecipeCommentsList').on('click', '.foodRecipeComments_item .btn_reply', function(){
+				
+				var parentCommentId = $(this).closest('.foodRecipeComments_item').find('#foodRecipeCommentsId').val(); // 부모 댓글 ID
 				var memberId = $('#memberId').val(); // 작성자 ID
 				var replyContent = prompt("답글을 입력하세요: "); // 사용자로부터 답글 입력 받기
 
 				if(replyContent) {
 					// 답글 데이터를 객체로 생성
 					var replyObj = {
-						'parentCommentId': parentCommentId,
+						'parentCommentsId': parentCommentsId,
 						'memberId': memberId,
-						'foodRecipeCommentContent': replyContent
+						'foodRecipeCommentsContent': replyContent
 					};
 					
 					// 답글 전송
 					$.ajax({
 						type : 'POST',
-						url : '../foodRecipeComments/reply', // 답글 작성 URL
+						url : '../foodRecipeCommentsList/reply', // 답글 작성 URL
 						headers : {
 							'Content-Type' : 'application/json'
 						},
@@ -186,13 +192,14 @@
 			}); 
 
 			// 답글 수정 기능
-			$('#foodRecipeCommentslist').on('click', '.foodRecipeComment_item .btn_reply_update', function(){
+			$('#foodRecipeCommentsList').on('click', '.foodRecipeComments_item .btn_reply_update', function(){
+				
 				var replyId = $(this).closest('.reply_item').data('reply-id'); // 답글 ID
 				var updatedContent = prompt("답글을 수정하세요: ");
 				if(updatedContent) {
 					$.ajax({
 						type: 'PUT',
-						url: '../foodRecipeComments/reply/' + replyId,
+						url: '../foodRecipeCommentsList/reply/' + replyId,
 						headers: {
 							'Content-Type': 'application/json'
 						},
@@ -208,13 +215,14 @@
 			});
 
 			// 답글 삭제 기능
-			$('#foodRecipeCommentslist').on('click', '.foodRecipeComment_item .btn_reply_delete', function(){
+			$('#foodRecipeCommentsList').on('click', '.foodRecipeComments_item .btn_reply_delete', function(){
+				
 				var replyId = $(this).closest('.reply_item').data('reply-id'); // 답글 ID
 				$.ajax({
 					type: 'DELETE',
-					url: '../foodRecipeComments/reply/' + replyId,
+					url: '../foodRecipeCommentsList/reply/' + replyId,
 					success: function(result) {
-						if(result == 1) {
+						if(result == 1) {	
 							alert('답글 삭제 성공!');
 							getAllFoodRecipeComments(); // 삭제 후 댓글 목록 갱신
 						}

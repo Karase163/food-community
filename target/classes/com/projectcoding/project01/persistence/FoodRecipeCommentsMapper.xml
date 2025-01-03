@@ -14,7 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    </resultMap>
    
    <insert id="insert">
-      INSERT INTO COMMENTS (FOOD_RECIPE_COMMENTS_ID, FOOD_RECIPE_BOARD_ID, MEMBER_ID, FOOD_RECIPE_COMMENTS_CONTENT)
+      INSERT INTO FOOD_RECIPE_COMMENTS (FOOD_RECIPE_COMMENTS_ID, FOOD_RECIPE_BOARD_ID, MEMBER_ID, FOOD_RECIPE_COMMENTS_CONTENT)
       VALUES (COMMENTS_SEQ.NEXTVAL, #{foodRecipeBoardId}, #{memberId}, #{foodRecipeCommentsContent})
    </insert>
    

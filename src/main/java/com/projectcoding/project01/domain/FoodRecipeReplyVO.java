@@ -20,5 +20,5 @@ public class FoodRecipeReplyVO {
     private int foodRecipeBoardId; 
     private String foodRecipeReplyContent; 
     private String MemberId;
-    private Date foodRecipeReplyDateCreated;
+    private Date foodRecipeReplyCreated;
 }

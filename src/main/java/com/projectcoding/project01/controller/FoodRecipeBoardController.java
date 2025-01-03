@@ -16,3 +16,5 @@ public class FoodRecipeBoardController {
 		log.info("detail()");
 	}
 }
+
+

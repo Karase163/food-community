@@ -18,10 +18,8 @@ public interface FoodRecipeBoardMapper {
 
 	int delete(int foodRecipeBoardId); // 상세 게시글 삭제
 
-	int updateCommentsCount(@Param("foodRecipeBoardId") int boardId, @Param("amount") int amount); // 댓글 수 변경
-
-	int updateReplyCount(@Param("foodRecipeBoardId") int boardId, @Param("amount") int amount); // 답글 수 변경
-
+	int updateCommentsCount(@Param("foodRecipeBoardId") int foodRecipeboardId, @Param("amount") int amount); // 댓글 수 변경
+	
 }
 
 

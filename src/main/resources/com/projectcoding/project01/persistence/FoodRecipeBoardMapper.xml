@@ -48,23 +48,19 @@
 
 	<delete id="delete">
 		<!-- 상세 게시글 삭제 -->
-		DELETE FROM FOOD_RECIPE_BOARD WHERE FOOD_RECIPE_BOARD_ID = #{foodRecipeBoardId}
+		DELETE FOOD_RECIPE_BOARD WHERE FOOD_RECIPE_BOARD_ID = #{foodRecipeBoardId}
 	</delete>
-
+	
 		<update id="updateCommentsCount">
 			UPDATE FOOD_RECIPE_BOARD
 			SET FOOD_RECIPE_COMMENTS_COUNT = FOOD_RECIPE_COMMENTS_COUNT + #{amount}
 			WHERE FOOD_RECIPE_BOARD_ID = #{foodRecipeBoardId}
 		</update>
 
-	<update id="updateReplyCount">
-		UPDATE FOOD_RECIPE_BOARD
-		SET FOOD_RECIPE_REPLY_COUNT = FOOD_RECIPE_REPLY_COUNT + #{amount}
-		WHERE FOOD_RECIPE_BOARD_ID = #{foodRecipeBoardId}
+	<update id="updateCommentReplyCount">
+   		UPDATE FOOD_RECIPE_COMMENTS
+    	SET FOOD_RECIPE_COMMENTS_REPLY_COUNT = FOOD_RECIPE_COMMENTS_REPLY_COUNT + #{amount}
+    	WHERE FOOD_RECIPE_COMMENTS_ID = #{foodRecipeCommentsId}
 	</update>
-	
-	
-
-
 
 </mapper>

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.projectcoding.project01.domain.FoodRecipeReplyVO;
-import com.projectcoding.project01.persistence.FoodRecipeBoardMapper;
+import com.projectcoding.project01.persistence.FoodRecipeCommentsMapper;
 import com.projectcoding.project01.persistence.FoodRecipeReplyMapper;
 
 import lombok.extern.log4j.Log4j;
@@ -20,7 +20,7 @@ public class FoodRecipeReplyServiceImple implements FoodRecipeReplyService {
     private FoodRecipeReplyMapper foodRecipeReplyMapper;
 
     @Autowired
-    private FoodRecipeBoardMapper foodRecipeBoardMapper;
+    private FoodRecipeCommentsMapper foodRecipeCommentsMapper;
 
     @Transactional(value = "transactionManager")
 
@@ -31,9 +31,10 @@ public class FoodRecipeReplyServiceImple implements FoodRecipeReplyService {
         int insertReplyResult = foodRecipeReplyMapper.insert(foodRecipeReplyVO);
         log.info(insertReplyResult + "행 답글 추가");
         
-        int updateReplyCountResult = foodRecipeBoardMapper.updateReplyCount(foodRecipeReplyVO.getFoodRecipeBoardId(), 1); // 수정: 변수명 변경
-        log.info(updateReplyCountResult + "행 게시판 답글 수 수정");
-        return 1; 
+        int updateReplyCountResult = foodRecipeCommentsMapper.updateReplyCount(foodRecipeReplyVO.getFoodRecipeCommentsId(), 1); // 댓글 ID로 수정
+        log.info(updateReplyCountResult + "행 댓글 답글 수 수정");
+        return updateReplyCountResult;  // 수정된 행의 수 반환
+
     }
 
     @Override
@@ -57,14 +58,15 @@ public class FoodRecipeReplyServiceImple implements FoodRecipeReplyService {
 
     @Transactional(value = "transactionManager")
     @Override
-    public int deleteReply(int foodRecipeReplyId, int foodRecipeBoardId) {
+    public int deleteReply(int foodRecipeReplyId, int foodRecipeCommentsId) {
         log.info("deleteReply()");
         
         int deleteReplyResult = foodRecipeReplyMapper.delete(foodRecipeReplyId);
         log.info(deleteReplyResult + "행 답글 삭제");
-        int updateReplyCountResult = foodRecipeBoardMapper.updateReplyCount(foodRecipeBoardId, -1);
-        log.info(updateReplyCountResult + "행 게시판 답글 수 수정");
-        
-        return 1; 
+        int updateReplyCountResult = foodRecipeCommentsMapper.updateReplyCount(foodRecipeCommentsId, -1);
+        log.info(updateReplyCountResult + "행 댓글 답글 수 수정");
+
+        return updateReplyCountResult;  // 수정된 댓글 수 반환
+ 
     }
 }

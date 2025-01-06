@@ -15,6 +15,5 @@ public interface FoodRecipeReplyMapper {
     
     int delete(int foodRecipeReplyId); 
 
-    List<FoodRecipeReplyVO> selectRepliesByBoardId(int foodRecipeBoardId);
     
 }

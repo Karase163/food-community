@@ -35,5 +35,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       WHERE FOOD_RECIPE_COMMENTS_ID = #{foodRecipeCommentsId}
    </delete>
    
+   <update id="updateCommentReplyCount">
+   		UPDATE FOOD_RECIPE_COMMENTS
+    	SET FOOD_RECIPE_COMMENTS_REPLY_COUNT = FOOD_RECIPE_COMMENTS_REPLY_COUNT + #{amount}
+    	WHERE FOOD_RECIPE_COMMENTS_ID = #{foodRecipeCommentsId}
+	</update>
+   
    
 </mapper>

@@ -15,3 +15,4 @@ public interface FoodRecipeReplyService {
 	int deleteReply(int foodRecipeReplyId, int foodRecipeCommentsId); 
 }
 
+

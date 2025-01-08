@@ -67,6 +67,8 @@ public class FoodRecipeReplyServiceImple implements FoodRecipeReplyService {
         log.info(updateReplyCountResult + "행 댓글 답글 수 수정");
 
         return updateReplyCountResult;  // 수정된 댓글 수 반환
+        
+        
  
     }
 }

@@ -15,9 +15,9 @@ import lombok.ToString;
 @ToString
 public class FoodRecipeReplyVO {
 
-    private int foodRecipeReplyId; 
-    private int foodRecipeCommentsId; 
-    private String foodRecipeReplyContent; 
-    private String MemberId;
-    private Date foodRecipeReplyCreated;
+	private int foodRecipeReplyId; 
+	private int foodRecipeCommentsId; 
+	private String foodRecipeReplyContent; 
+	private String memberId;
+	private Date foodRecipeReplyCreated;
 }

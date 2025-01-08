@@ -13,6 +13,6 @@ public interface FoodRecipeReplyService {
 	int updateReply(int foodRecipeReplyId, String foodRecipeReplyContent); 
 	
 	int deleteReply(int foodRecipeReplyId, int foodRecipeCommentsId); 
+	
+	
 }
-
-

@@ -12,7 +12,8 @@ public interface FoodRecipeCommentsService {
 
     int updateComments(int foodRecipeCommentsId, String foodRecipeCommentsContent); 
 
-    int deleteComments(int foodRecipeCommentsId, int foodRecipeBoardId); 
+    int deleteComments(int foodRecipeCommentsId, int foodRecipeBoardId);
+
 }
 
 

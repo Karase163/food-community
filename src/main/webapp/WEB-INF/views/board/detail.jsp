@@ -147,38 +147,36 @@
 			}); 
 			
 			// 답글 작성 기능
-			$('#foodRecipeComments').on('click', '.foodRecipeComments_item .btn_reply', function(){
-				
-				var parentCommentsId = $(this).closest('.foodRecipeComments_item').find('#foodRecipeCommentsId').val(); // 부모 댓글 ID
-				var memberId = $('#memberId').val(); // 작성자 ID
-				var foodRecipeReplyContent = prompt("답글을 입력하세요: "); // 사용자로부터 답글 입력 받기
+			$('#foodRecipeComments').on('click', '.foodRecipeComments_item .btn_reply', function() {
+			    var foodRecipeCommentsId = $(this).closest('.foodRecipeComments_item').find('#foodRecipeCommentsId').val();
+			    var memberId = $('#memberId').val(); 
+			    var foodRecipeReplyContent = prompt("답글을 입력하세요: ");
 
-				if(foodRecipeReplyContent) {
-					// 답글 데이터를 객체로 생성
-					var replyObj = {
-						'parentCommentsId': parentCommentsId,
-						'memberId': memberId,
-						'foodRecipeCommentsContent': foodRecipeReplyContent
-					};
-					
-					// 답글 전송
-					$.ajax({
-						type : 'POST',
-						url : '../foodRecipeComments/foodRecipeReply', // 답글 작성 URL
-						headers : {
-							'Content-Type' : 'application/json'
-						},
-						data : JSON.stringify(replyObj),
-						success : function(result) {
-							if(result == 1) {
-								alert('답글 작성 성공!');
-								getAllFoodRecipeComments(); // 댓글 목록 갱신
-							}
-						}
-					});
-				}
-			}); 
+			    if (foodRecipeReplyContent) {
+			        // 답글 데이터를 객체로 생성
+			        var replyObj = {
+			            'foodRecipeCommentsId': foodRecipeCommentsId,
+			            'memberId': memberId,
+			            'foodRecipeReplyContent': foodRecipeReplyContent
+			        };
 
+			        // 답글 전송
+			        $.ajax({
+			            type: 'POST',
+			            url: '../foodRecipeComments/foodRecipeReply', // 답글 작성 URL
+			            headers: {
+			                'Content-Type': 'application/json' // JSON 형식으로 보내기 위한 헤더
+			            },
+			            data: JSON.stringify(replyObj), // 객체를 JSON으로 변환
+			            success: function(result) {
+			                if (result == 1) {
+			                    alert('답글 작성 성공!');
+			                    getAllFoodRecipeComments(); // 댓글 목록 갱신
+			                }
+			            }
+			        });
+			    }
+			});
 		});
 	</script>
 

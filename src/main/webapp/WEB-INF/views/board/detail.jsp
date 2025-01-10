@@ -88,8 +88,7 @@
 								+ '<button class="btn_update">수정</button>'
 								+ '<button class="btn_delete">삭제</button>'
 								+ '&nbsp;&nbsp;'
-								+ '<button class="btn_reply">답글</button>'  <!-- 답글 버튼 추가 -->
-								+ '</pre>'
+								+ '<button class="btn_reply">답글</button>'  								+ '</pre>'
 								+ '</div>';
 						});
 						
@@ -126,7 +125,6 @@
 			// 댓글 삭제 기능
 			$('#foodRecipeComments').on('click', '.foodRecipeComments_item .btn_delete', function(){
 				console.log(this);
-
 				var foodRecipeBoardId = $('#foodRecipeBoardId').val(); 
 				var foodRecipeCommentsId = $(this).prevAll('#foodRecipeCommentsId').val(); // 삭제할 댓글 ID
 				
@@ -163,7 +161,7 @@
 			        // 답글 전송
 			        $.ajax({
 			            type: 'POST',
-			            url: '../foodRecipeComments/foodRecipeReply', // 답글 작성 URL
+			            url: '../foodRecipeReply', // 답글 작성 URL
 			            headers: {
 			                'Content-Type': 'application/json' // JSON 형식으로 보내기 위한 헤더
 			            },

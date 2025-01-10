@@ -67,6 +67,3 @@ public class FoodRecipeReplyRESTController {
 		return new ResponseEntity<Integer>(result, HttpStatus.OK);
 	}
 }
-
-
-

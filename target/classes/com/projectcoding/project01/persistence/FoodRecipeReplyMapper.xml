@@ -15,7 +15,7 @@
 
     <insert id="insert">
         INSERT INTO FOOD_RECIPE_REPLY (FOOD_RECIPE_REPLY_ID, FOOD_RECIPE_BOARD_ID, FOOD_RECIPE_COMMENTS_ID, MEMBER_ID, FOOD_RECIPE_REPLY_CONTENT)
-        VALUES (REPLY_SEQ.NEXTVAL, #{foodRecipeBoardId}, #{memberId}, #{foodRecipeCommentsId) #{foodRecipeReplyContent})
+        VALUES (REPLY_SEQ.NEXTVAL, #{foodRecipeBoardId}, #{memberId}, #{foodRecipeCommentsId}, #{foodRecipeReplyContent})
     </insert>
 
     <select id="selectListByCommentsId" resultMap="foodRecipeReplyResultMap">

@@ -6,7 +6,6 @@
 
     <resultMap type="com.projectcoding.project01.domain.FoodRecipeReplyVO" id="foodRecipeReplyResultMap">
         <id property="foodRecipeReplyId" column="FOOD_RECIPE_REPLY_ID" />
-        <result property="foodRecipeBoardId" column="FOOD_RECIPE_BOARD_ID" />
         <result property="foodRecipeCommentsId" column="FOOD_RECIPE_COMMENTS_ID" />
         <result property="foodRecipeReplyContent" column="FOOD_RECIPE_REPLY_CONTENT" />
         <result property="memberId" column="MEMBER_ID" />
@@ -14,8 +13,8 @@
     </resultMap>
 
     <insert id="insert">
-        INSERT INTO FOOD_RECIPE_REPLY (FOOD_RECIPE_REPLY_ID, FOOD_RECIPE_BOARD_ID, FOOD_RECIPE_COMMENTS_ID, MEMBER_ID, FOOD_RECIPE_REPLY_CONTENT)
-        VALUES (REPLY_SEQ.NEXTVAL, #{foodRecipeBoardId}, #{memberId}, #{foodRecipeCommentsId}, #{foodRecipeReplyContent})
+        INSERT INTO FOOD_RECIPE_REPLY (FOOD_RECIPE_REPLY_ID, FOOD_RECIPE_COMMENTS_ID, FOOD_RECIPE_REPLY_CONTENT, MEMBER_ID)
+        VALUES (REPLY_SEQ.NEXTVAL, #{foodRecipeCommentsId}, #{foodRecipeReplyContent}, #{memberId})
     </insert>
 
     <select id="selectListByCommentsId" resultMap="foodRecipeReplyResultMap">

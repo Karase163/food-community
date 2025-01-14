@@ -33,7 +33,6 @@ public class FoodRecipeReplyServiceImple implements FoodRecipeReplyService {
         int updateReplyCountResult = foodRecipeCommentsMapper.updateReplyCount(foodRecipeReplyVO.getFoodRecipeCommentsId(), 1); // 댓글 ID로 수정
         log.info(updateReplyCountResult + "행 댓글 답글 수 수정");
         return updateReplyCountResult;
-
     }
 
     @Override

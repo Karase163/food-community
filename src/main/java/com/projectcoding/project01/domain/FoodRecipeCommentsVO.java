@@ -20,4 +20,6 @@ public class FoodRecipeCommentsVO {
     private String MemberId;
     private String foodRecipeCommentsContent;
     private Date foodRecipeCommentsCreated;
+    private int foodRecipeReplyCount;
+
 }

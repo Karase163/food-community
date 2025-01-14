@@ -20,12 +20,11 @@
 		<result property="memberId" column="MEMBER_ID" />
 		<result property="foodRecipeBoardCreated" column="FOOD_RECIPE_BOARD_CREATED" />
 		<result property="foodRecipeCommentsCount" column="FOOD_RECIPE_COMMENTS_COUNT" />
-		<result property="foodRecipeReplyCount" column="FOOD_RECIPE_REPLY_COUNT" />
 	</resultMap>
 
 	<insert id="insert">
-		INSERT INTO FOOD_RECIPE_BOARD (FOOD_RECIPE_BOARD_ID, FOOD_RECIPE_BOARD_TITLE, FOOD_RECIPE_BOARD_CONTENT, MEMBER_ID)
-		VALUES (BOARD_SEQ.NEXTVAL, #{foodRecipeBoardTitle}, #{foodRecipeBoardContent}, #{memberId})
+		INSERT INTO FOOD_RECIPE_BOARD (FOOD_RECIPE_BOARD_ID, FOOD_RECIPE_BOARD_TITLE, FOOD_RECIPE_BOARD_CONTENT, MEMBER_ID, FOOD_RECIPE_COMMENTS_COUNT)
+		VALUES (BOARD_SEQ.NEXTVAL, #{foodRecipeBoardTitle}, #{foodRecipeBoardContent}, #{memberId}, 0)
 	</insert>
 
 	<select id="selectList" resultMap="foodRecipeBoardResultMap">

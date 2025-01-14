@@ -11,11 +11,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       <result property="memberId" column="MEMBER_ID" />
       <result property="foodRecipeCommentsContent" column="FOOD_RECIPE_COMMENTS_CONTENT" />
       <result property="foodRecipeCommentsCreated" column="FOOD_RECIPE_COMMENTS_CREATED" />
+      <result property="foodRecipeReplyCount" column="FOOD_RECIPE_Reply_COUNT" />
    </resultMap>
    
    <insert id="insert">
-      INSERT INTO FOOD_RECIPE_COMMENTS (FOOD_RECIPE_COMMENTS_ID, FOOD_RECIPE_BOARD_ID, MEMBER_ID, FOOD_RECIPE_COMMENTS_CONTENT)
-      VALUES (COMMENTS_SEQ.NEXTVAL, #{foodRecipeBoardId}, #{memberId}, #{foodRecipeCommentsContent})
+      INSERT INTO FOOD_RECIPE_COMMENTS (FOOD_RECIPE_COMMENTS_ID, FOOD_RECIPE_BOARD_ID, MEMBER_ID, FOOD_RECIPE_COMMENTS_CONTENT, FOOD_RECIPE_REPLY_COUNT)
+      VALUES (COMMENTS_SEQ.NEXTVAL, #{foodRecipeBoardId}, #{memberId}, #{foodRecipeCommentsContent}, 0)
    </insert>
    
    <select id="selectListByBoardId" resultMap="foodRecipeCommentsResultMap">
@@ -35,11 +36,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       WHERE FOOD_RECIPE_COMMENTS_ID = #{foodRecipeCommentsId}
    </delete>
    
-   <update id="updateCommentReplyCount">
+   <update id="updateReplyCount">
    		UPDATE FOOD_RECIPE_COMMENTS
-    	SET FOOD_RECIPE_COMMENTS_REPLY_COUNT = FOOD_RECIPE_COMMENTS_REPLY_COUNT + #{amount}
+    	SET FOOD_RECIPE_REPLY_COUNT = FOOD_RECIPE_REPLY_COUNT + #{amount}
     	WHERE FOOD_RECIPE_COMMENTS_ID = #{foodRecipeCommentsId}
 	</update>
+	
    
    
 </mapper>

@@ -22,4 +22,4 @@ public class FoodRecipeCommentsVO {
     private Date foodRecipeCommentsCreated;
     private int foodRecipeReplyCount;
 
-}
+}		

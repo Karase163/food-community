@@ -22,9 +22,3 @@ public interface ReviewCommentsMapper {
     int updateReplyCount(@Param("reviewCommentsId") int reviewCommentsId, @Param("amount") int amount); // 답글 수 변경
 
 }
-
-	
-
-
-
-

@@ -33,6 +33,4 @@
         DELETE FROM Review_REPLY
         WHERE Review_REPLY_ID = #{reviewReplyId}	
     </delete>
-    
-
-</mapper> 
+</mapper>

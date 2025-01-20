@@ -21,4 +21,3 @@ public class ReviewCommentsVO {
     private Date reviewCommentsCreated;
     private int reviewReplyCount;
 }
-

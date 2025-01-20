@@ -19,6 +19,7 @@ import com.projectcoding.project01.service.FoodRecipeCommentsService;
 
 import lombok.extern.log4j.Log4j;
 
+
 // 비동기 방식이기 때문에 JSON 사용을 위한 @RestController 사용
 @RestController // @Responsebody와 @Requestbody를 사용해서 JSON데이터의 변환을 자동으로 해주는 언노테이션
 @RequestMapping(value = "/foodRecipeComments")
@@ -28,7 +29,7 @@ public class FoodRecipeCommentsRESTController {
 	@Autowired
 	private FoodRecipeCommentsService foodRecipeCommentsService;
 
-	@PostMapping // POST : 음식 레시피 댓글 입력
+	@PostMapping // POST : 음식 레시피 답글 입력
 	public ResponseEntity<Integer> createFoodRecipeComments(@RequestBody FoodRecipeCommentsVO foodRecipeCommentsVO) {
 		log.info("createFoodRecipeComments()");
 		log.info(foodRecipeCommentsVO);
@@ -37,32 +38,31 @@ public class FoodRecipeCommentsRESTController {
 		return new ResponseEntity<Integer>(result, HttpStatus.OK);
 	}
 
-	@GetMapping("/all/{foodRecipeBoardId}") // GET : 음식 레시피 댓글 선택(all)
-	public ResponseEntity<List<FoodRecipeCommentsVO>> readyAllFoodRecipeComments(@PathVariable("foodRecipeBoardId") int foodRecipeBoardId) {
-		log.info("readyAllFoodRecipeComments()");
-		log.info("foodRecipeBoardId = " + foodRecipeBoardId);
+	@GetMapping("/all/{foodRecipeCommentsId}") // GET : 음식 레시피 답글 선택(all)
+	public ResponseEntity<List<FoodRecipeCommentsVO>> readyAllFoodRecipeComments(@PathVariable("foodRecipeCommentsId") int foodRecipeCommentsId) {
+		log.info("readyAllFoodRecipeReply()");
+		log.info("foodRecipeCommentsId = " + foodRecipeCommentsId);
 
-		List<FoodRecipeCommentsVO> list = foodRecipeCommentsService.getAllComments(foodRecipeBoardId);
-		// ResponseEntity<T> : T의 타입은 프론트 side로 전송될 데이터의 타입으로 선언
+		List<FoodRecipeCommentsVO> list = foodRecipeCommentsService.getAllComments(foodRecipeCommentsId);
 		return new ResponseEntity<List<FoodRecipeCommentsVO>>(list, HttpStatus.OK);
 	}
 
-	@PutMapping("/{foodRecipeCommentsId}") // PUT : 음식 레시피 댓글 수정
-	public ResponseEntity<Integer> updateComment(@PathVariable("foodRecipeCommentsId") int foodRecipeCommentsId, 
+	@PutMapping("/{foodRecipeCommentsId}") // PUT : 음식 레시피 답글 수정
+	public ResponseEntity<Integer> updateReply(@PathVariable("foodRecipeCommentsId") int foodRecipeCommentsId, 
 		@RequestBody String foodRecipeCommentsContent) {
-		log.info("updateFoodRecipeComments()");
+		log.info("updateFoodRecipeReply()");
 		log.info("foodRecipeCommentsId = " + foodRecipeCommentsId);
 		int result = foodRecipeCommentsService.updateComments(foodRecipeCommentsId, foodRecipeCommentsContent);
 		return new ResponseEntity<Integer>(result, HttpStatus.OK);
 	}
 
-	@DeleteMapping("/{foodRecipeCommentsId}/{foodRecipeBoardId}") // DELETE : 음식 레시피 댓글 삭제
-	public ResponseEntity<Integer> deleteComments(@PathVariable("foodRecipeCommentsId") int foodRecipeCommentsId,
+	@DeleteMapping("/{foodRecipeCommentsId}/{foodRecipeBoardId}") // DELETE : 음식 레시피 답글 삭제
+	public ResponseEntity<Integer> deleteReply(@PathVariable("foodRecipeCommentsId") int foodRecipeCommentsId,
 			@PathVariable("foodRecipeBoardId") int foodRecipeBoardId) {
 		log.info("deleteFoodRecipeComments()");
 		log.info("foodRecipeCommentsId = " + foodRecipeCommentsId);
 
-		int result = foodRecipeCommentsService.deleteComments(foodRecipeCommentsId, foodRecipeBoardId);
+		int result = foodRecipeCommentsService.deleteComments(foodRecipeCommentsId, foodRecipeCommentsId);
 
 		return new ResponseEntity<Integer>(result, HttpStatus.OK);
 	}

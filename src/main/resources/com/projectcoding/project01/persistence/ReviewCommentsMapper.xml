@@ -41,7 +41,4 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	SET Review_REPLY_COUNT = Review_REPLY_COUNT + #{amount}
     	WHERE Review_COMMENTS_ID = #{reviewCommentsId}
 	</update>
-	
-   
-   
 </mapper>

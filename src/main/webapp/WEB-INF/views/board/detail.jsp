@@ -101,7 +101,7 @@
 
                     // 각 댓글에 대해 답글 목록을 가져오는 부분을 분리하여 처리
                     $(data).each(function() {
-                        getRepliesForComment(this.foodRecipeCommentsId); // 개별 댓글의 답글 목록을 갱신
+                        getRepliesForComments(this.foodRecipeCommentsId); // 개별 댓글의 답글 목록을 갱신
                     });
                 }
             ); 
@@ -181,7 +181,7 @@
                         console.log('답글 작성 응답:', result);
                         if (result == 1) {
                             alert('답글 작성 성공!');
-                            getRepliesForComment(foodRecipeCommentsId); // 답글 목록만 갱신
+                            getRepliesForComments(foodRecipeCommentsId); // 답글 목록만 갱신
                         }
                     }
                 });
@@ -189,7 +189,7 @@
         });
 
         // 선택된 댓글에 대한 답글 목록을 가져오는 함수
-        function getRepliesForComment(foodRecipeCommentsId) {
+        function getRepliesForComments(foodRecipeCommentsId) {
             $.getJSON('../foodRecipeReply/all/' + foodRecipeCommentsId, function(replies) {
                 var replyList = '';
                 console.log('댓글에 대한 답글 목록:', replies);
@@ -227,7 +227,7 @@
                         console.log('답글 수정 응답:', result);
                         if (result == 1) {
                             alert('답글 수정 성공!');
-                            getRepliesForComment(foodRecipeReplyId); // 답글 목록 갱신
+                            getRepliesForComments(foodRecipeReplyId); // 답글 목록 갱신
                         }
                     }
                 });
@@ -250,7 +250,7 @@
                     console.log('답글 삭제 응답:', result);
                     if (result == 1) {
                         alert('답글 삭제 성공!');
-                        getRepliesForComment(foodRecipeCommentsId);  // 해당 댓글에 대한 답글 목록 갱신
+                        getRepliesForComments(foodRecipeCommentsId);  // 해당 댓글에 대한 답글 목록 갱신
                     }
                 }
             });

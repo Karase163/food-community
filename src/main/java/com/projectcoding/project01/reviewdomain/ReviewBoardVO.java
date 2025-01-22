@@ -1,7 +1,6 @@
-package com.projectcoding.project01.domain;
+package com.projectcoding.project01.reviewdomain;
 
 import java.util.Date;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,11 +12,12 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class FoodRecipeReplyVO {
 
-	private int foodRecipeReplyId; 
-	private int foodRecipeCommentsId; 
-	private String foodRecipeReplyContent; 
+public class ReviewBoardVO {
+	private int reviewBoardId;
+	private String reviewBoardTitle;
+	private String reviewBoardContent;
 	private String memberId;
-	private Date foodRecipeReplyCreated;
+	private Date reviewBoardCreated;
+	private int reviewCommentsCount;
 }

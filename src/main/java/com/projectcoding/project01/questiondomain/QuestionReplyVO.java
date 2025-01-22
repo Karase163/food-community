@@ -1,4 +1,4 @@
-package com.projectcoding.project01.domain;
+package com.projectcoding.project01.questiondomain;
 
 import java.util.Date;
 
@@ -13,11 +13,11 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class FoodRecipeReplyVO {
-
-	private int foodRecipeReplyId; 
-	private int foodRecipeCommentsId; 
-	private String foodRecipeReplyContent; 
+public class QuestionReplyVO {
+	
+	private int questionReplyId; 
+	private int questionCommentsId; 
+	private String questionReplyContent; 
 	private String memberId;
-	private Date foodRecipeReplyCreated;
+	private Date questionReplyCreated;
 }

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.projectcoding.project01.questionpersistence.QuestionCommentsMapper">
+   
+   <resultMap type="com.projectcoding.project01.questiondomain.QuestionCommentsVO" id="questionCommentsResultMap">
+      <id property="questionCommentsId" column="QUESTION_COMMENTS_ID" /> 
+      <result property="questionBoardId" column="QUESTION_BOARD_ID" /> 
+      <result property="memberId" column="MEMBER_ID" />
+      <result property="questionCommentsContent" column="QUESTION_COMMENTS_CONTENT" />
+      <result property="questionCommentsCreated" column="QUESTION_COMMENTS_CREATED" />
+      <result property="questionReplyCount" column="QUESTION_Reply_COUNT" />
+   </resultMap>
+   
+   <insert id="insert">
+      INSERT INTO QUESTION_COMMENTS (QUESTION_COMMENTS_ID, QUESTION_BOARD_ID, MEMBER_ID, QUESTION_COMMENTS_CONTENT, QUESTION_REPLY_COUNT)
+      VALUES (COMMENTS_SEQ.NEXTVAL, #{questionBoardId}, #{memberId}, #{questionCommentsContent}, 0)
+   </insert>
+   
+   <select id="selectListByBoardId" resultMap="questionCommentsResultMap">
+      SELECT * FROM QUESTION_COMMENTS
+      WHERE QUESTION_BOARD_ID = #{questionBoardId}
+      ORDER BY QUESTION_COMMENTS_ID
+   </select>
+   
+   <update id="update">
+      UPDATE QUESTION_COMMENTS
+      SET QUESTION_COMMENTS_CONTENT = #{questionCommentsContent}
+      WHERE QUESTION_COMMENTS_ID = #{questionCommentsId}
+   </update>
+   
+   <delete id="delete">
+      DELETE FROM QUESTION_COMMENTS
+      WHERE QUESTION_COMMENTS_ID = #{questionCommentsId}
+   </delete>
+   
+   <update id="updateReplyCount">
+   		UPDATE QUESTION_COMMENTS
+    	SET QUESTION_REPLY_COUNT = QUESTION_REPLY_COUNT + #{amount}
+    	WHERE QUESTION_COMMENTS_ID = #{questionCommentsId}
+	</update>
+	
+   
+   
+</mapper>

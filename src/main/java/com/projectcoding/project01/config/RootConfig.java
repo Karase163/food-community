@@ -19,7 +19,10 @@
 	@Configuration	
 	@ComponentScan(basePackages = {"com.projectcoding.project01.service"})
 	@ComponentScan(basePackages = {"com.projectcoding.project01.aspect"})
-	@MapperScan(basePackages = {"com.projectcoding.project01.reviewpersistence", "com.projectcoding.project01.persistence"}) // 추가된 부분
+	@MapperScan(basePackages = {
+	    "com.projectcoding.project01.reviewpersistence", 
+	    "com.projectcoding.project01.persistence", 
+	    "com.projectcoding.project01.questionpersistence"})
 	// 패키지 경로로 Mapper 스캐닝
 	@EnableAspectJAutoProxy //aspect가 자동으로 proxy 기능을 사용한다. 정도로 인식된다.
 	public class RootConfig {

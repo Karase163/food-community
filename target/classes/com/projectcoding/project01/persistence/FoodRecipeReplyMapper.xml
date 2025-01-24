@@ -9,7 +9,6 @@
         <result property="foodRecipeCommentsId" column="FOOD_RECIPE_COMMENTS_ID" />
         <result property="foodRecipeReplyContent" column="FOOD_RECIPE_REPLY_CONTENT" />
         <result property="memberId" column="MEMBER_ID" />
-        <result property="foodRecipeReplyCreated" column="FOOD_RECIPE_REPLY_CREATED" />
     </resultMap>
 
     <insert id="insert">

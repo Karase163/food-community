@@ -11,10 +11,10 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class FoodRecipeReplyVO {
-
-	private int foodRecipeReplyId; 
-	private int foodRecipeCommentsId; 
-	private String foodRecipeReplyContent; 
+public class QuestionReplyVO {
+	
+	private int questionReplyId; 
+	private int questionCommentsId; 
+	private String questionReplyContent; 
 	private String memberId;
 }

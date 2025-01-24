@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,30 +6,44 @@
 <title>댓글</title>
 <!-- jquery 라이브러리 import -->
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<style>
+    /* 답글과 버튼의 스타일 */
+    .replyItem {
+        margin-bottom: 15px; /* 답글과 다른 답글 간 간격 추가 */
+    }
+
+    .reply-actions {
+        margin-top: 5px; /* 답글과 버튼 사이 간격 */
+    }
+    
+    .reply-actions button {
+        margin-right: 5px; /* 버튼 간 간격 추가 */
+    }
+</style>
 </head>
 <body>
 
-	<input type="hidden" id="questionBoardId" value="1">
+    <input type="hidden" id="questionBoardId" value="1">
 
-	<div style="text-align: center;">
-		<input type="text" id="memberId"> 
-		<input type="text" id="questionCommentsContent">
-		<button id="btnAdd">작성</button>
-	</div>
+    <div style="text-align: center;">
+        <input type="text" id="memberId"> 
+        <input type="text" id="questionCommentsContent">
+        <button id="btnAdd">작성</button>
+    </div>
 
-	<hr>
-	<div style="text-align: center;">
-		<div id="questionComments"></div>
-	</div>
+    <hr>
+    <div style="text-align: center;">
+        <div id="questionComments"></div>
+    </div>
 
-	<script type="text/javascript">
+    <script type="text/javascript">
     $(document).ready(function(){
         getAllQuestionComments(); // 댓글 목록 가져오기
 
         // 댓글 작성 기능
         $('#btnAdd').click(function(){
             var questionBoardId = $('#questionBoardId').val(); // 게시판 번호
-            var memberId = $('#questionId').val(); // 작성자 ID
+            var memberId = $('#memberId').val(); // 작성자 ID
             var questionCommentsContent = $('#questionCommentsContent').val(); // 댓글 내용
             // 댓글 데이터를 객체로 생성
             var obj = {
@@ -52,7 +65,7 @@
                     console.log('서버 응답:', result);
                     if(result == 1) {
                         alert('댓글 입력 성공');
-                        getAllQeustionComments(); // 댓글 목록 갱신
+                        getAllQuestionComments(); // 댓글 목록 갱신
                     }
                 }
             });
@@ -71,16 +84,12 @@
 
                 // 각 댓글에 대해 반복하며 HTML 요소를 생성
                 $(data).each(function(){
-                    var questionCommentsCreated = new Date(this.questionCommentsCreated);
-
                     list += '<div class="questionComments_item">'
                         + '<pre>'
                         + '<input type="hidden" id="questionCommentsId" value="'+ this.questionCommentsId +'">'
                         + this.memberId
                         + '&nbsp;&nbsp;' 
                         + '<input type="text" id="questionCommentsContent" value="'+ this.questionCommentsContent +'">'
-                        + '&nbsp;&nbsp;'
-                        + questionCommentsCreated
                         + '&nbsp;&nbsp;'
                         + '<button class="btn_update">수정</button>'
                         + '<button class="btn_delete">삭제</button>'
@@ -172,7 +181,19 @@
                         console.log('답글 작성 응답:', result);
                         if (result == 1) {
                             alert('답글 작성 성공!');
-                            getRepliesForComment(questionCommentsId); // 답글 목록만 갱신
+                            // 새로 작성된 답글을 동적으로 HTML에 추가합니다.
+                            var replyList = '<div class="replyItem">'
+                                + '<p>' + memberId + ': ' + questionReplyContent + '</p>'
+                                + '<div class="reply-actions">'
+                                + '<button class="btn_reply_update">수정</button>'
+                                + '<button class="btn_reply_delete">삭제</button>'
+                                + '</div>';
+
+                            // 해당 댓글에 답글을 추가
+                            $('#questionComments').find('#questionCommentsId[value="' + questionCommentsId + '"]')
+                                .closest('.questionComments_item')
+                                .find('.replies')
+                                .append(replyList); // 기존 답글에 새로 작성된 답글을 추가
                         }
                     }
                 });
@@ -182,14 +203,16 @@
         // 선택된 댓글에 대한 답글 목록을 가져오는 함수
         function getRepliesForComment(questionCommentsId) {
             $.getJSON('../questionReply/all/' + questionCommentsId, function(replies) {
-                var questionList = '';
+                var replyList = '';
                 console.log('댓글에 대한 답글 목록:', replies);
                 $.each(replies, function(index, reply) {
                     replyList += '<div class="replyItem">'
                         + '<p>' + reply.memberId + ': ' + reply.questionReplyContent + '</p>'
+                        + '<div class="reply-actions">'
                         + '<button class="btn_reply_update">수정</button>'
                         + '<button class="btn_reply_delete">삭제</button>'
                         + '<input type="hidden" id="questionReplyId" value="' + reply.questionReplyId + '">'
+                        + '</div>'
                         + '</div>';
                 });
                 // 댓글에 해당하는 답글 목록을 업데이트
@@ -218,7 +241,8 @@
                         console.log('답글 수정 응답:', result);
                         if (result == 1) {
                             alert('답글 수정 성공!');
-                            getRepliesForComment(questionReplyId); // 답글 목록 갱신
+                            // 수정된 답글을 화면에 즉시 반영
+                            $('#reply-' + questionReplyId).find('p').text(questionReplyContent); // 답글 내용 변경
                         }
                     }
                 });

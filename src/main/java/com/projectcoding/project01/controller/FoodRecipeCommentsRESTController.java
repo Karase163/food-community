@@ -29,7 +29,7 @@ public class FoodRecipeCommentsRESTController {
 	@Autowired
 	private FoodRecipeCommentsService foodRecipeCommentsService;
 
-	@PostMapping // POST : 음식 레시피 답글 입력
+	@PostMapping // POST : 음식 레시피 댓글 입력
 	public ResponseEntity<Integer> createFoodRecipeComments(@RequestBody FoodRecipeCommentsVO foodRecipeCommentsVO) {
 		log.info("createFoodRecipeComments()");
 		log.info(foodRecipeCommentsVO);
@@ -38,7 +38,7 @@ public class FoodRecipeCommentsRESTController {
 		return new ResponseEntity<Integer>(result, HttpStatus.OK);
 	}
 
-	@GetMapping("/all/{foodRecipeCommentsId}") // GET : 음식 레시피 답글 선택(all)
+	@GetMapping("/all/{foodRecipeCommentsId}") // GET : 음식 레시피 댓글 선택(all)
 	public ResponseEntity<List<FoodRecipeCommentsVO>> readyAllFoodRecipeComments(@PathVariable("foodRecipeCommentsId") int foodRecipeCommentsId) {
 		log.info("readyAllFoodRecipeReply()");
 		log.info("foodRecipeCommentsId = " + foodRecipeCommentsId);
@@ -47,7 +47,7 @@ public class FoodRecipeCommentsRESTController {
 		return new ResponseEntity<List<FoodRecipeCommentsVO>>(list, HttpStatus.OK);
 	}
 
-	@PutMapping("/{foodRecipeCommentsId}") // PUT : 음식 레시피 답글 수정
+	@PutMapping("/{foodRecipeCommentsId}") // PUT : 음식 레시피 댓글 수정
 	public ResponseEntity<Integer> updateReply(@PathVariable("foodRecipeCommentsId") int foodRecipeCommentsId, 
 		@RequestBody String foodRecipeCommentsContent) {
 		log.info("updateFoodRecipeReply()");
@@ -56,7 +56,7 @@ public class FoodRecipeCommentsRESTController {
 		return new ResponseEntity<Integer>(result, HttpStatus.OK);
 	}
 
-	@DeleteMapping("/{foodRecipeCommentsId}/{foodRecipeBoardId}") // DELETE : 음식 레시피 답글 삭제
+	@DeleteMapping("/{foodRecipeCommentsId}/{foodRecipeBoardId}") // DELETE : 음식 레시피 댓글 삭제
 	public ResponseEntity<Integer> deleteReply(@PathVariable("foodRecipeCommentsId") int foodRecipeCommentsId,
 			@PathVariable("foodRecipeBoardId") int foodRecipeBoardId) {
 		log.info("deleteFoodRecipeComments()");

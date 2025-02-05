@@ -38,14 +38,15 @@ public class FoodRecipeCommentsRESTController {
 		return new ResponseEntity<Integer>(result, HttpStatus.OK);
 	}
 
-	@GetMapping("/all/{foodRecipeCommentsId}") // GET : 음식 레시피 댓글 선택(all)
-	public ResponseEntity<List<FoodRecipeCommentsVO>> readyAllFoodRecipeComments(@PathVariable("foodRecipeCommentsId") int foodRecipeCommentsId) {
-		log.info("readyAllFoodRecipeReply()");
-		log.info("foodRecipeCommentsId = " + foodRecipeCommentsId);
+	@GetMapping("/all/{foodRecipeBoardId}")
+	public ResponseEntity<List<FoodRecipeCommentsVO>> getAllFoodRecipeComments(@PathVariable("foodRecipeBoardId") int foodRecipeBoardId) {
+	    log.info("getAllFoodRecipeComments()");
+	    log.info("foodRecipeBoardId = " + foodRecipeBoardId);
 
-		List<FoodRecipeCommentsVO> list = foodRecipeCommentsService.getAllComments(foodRecipeCommentsId);
-		return new ResponseEntity<List<FoodRecipeCommentsVO>>(list, HttpStatus.OK);
+	    List<FoodRecipeCommentsVO> list = foodRecipeCommentsService.getAllComments(foodRecipeBoardId);
+	    return new ResponseEntity<List<FoodRecipeCommentsVO>>(list, HttpStatus.OK);
 	}
+
 
 	@PutMapping("/{foodRecipeCommentsId}") // PUT : 음식 레시피 댓글 수정
 	public ResponseEntity<Integer> updateReply(@PathVariable("foodRecipeCommentsId") int foodRecipeCommentsId, 
@@ -56,11 +57,10 @@ public class FoodRecipeCommentsRESTController {
 		return new ResponseEntity<Integer>(result, HttpStatus.OK);
 	}
 
-	@DeleteMapping("/{foodRecipeCommentsId}/{foodRecipeBoardId}") // DELETE : 음식 레시피 댓글 삭제
-	public ResponseEntity<Integer> deleteReply(@PathVariable("foodRecipeCommentsId") int foodRecipeCommentsId,
-			@PathVariable("foodRecipeBoardId") int foodRecipeBoardId) {
-		log.info("deleteFoodRecipeComments()");
-		log.info("foodRecipeCommentsId = " + foodRecipeCommentsId);
+	@DeleteMapping("/{foodRecipeCommentsId}")
+	public ResponseEntity<Integer> deleteFoodRecipeComments(@PathVariable("foodRecipeCommentsId") int foodRecipeCommentsId) {
+	    log.info("deleteFoodRecipeComments()");
+	    log.info("foodRecipeCommentsId = " + foodRecipeCommentsId);
 
 		int result = foodRecipeCommentsService.deleteComments(foodRecipeCommentsId, foodRecipeCommentsId);
 

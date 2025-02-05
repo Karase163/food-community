@@ -55,6 +55,25 @@
 		SET FOOD_RECIPE_COMMENTS_COUNT = FOOD_RECIPE_COMMENTS_COUNT + #{amount}
 		WHERE FOOD_RECIPE_BOARD_ID = #{foodRecipeBoardId}
 	</update>
+	
+	<!-- <select>에 resultMap을 반드시 넣어줘야 한다.  -->
+	<select id="selectListByPagination" resultMap="foodRecipeBoardResultMap">
+		SELECT * FROM
+		(
+			SELECT ROW_NUMBER() OVER(ORDER BY FOOD_RECIPE_BOARD_ID DESC)
+			AS RN, FOOD_RECIPE_BOARD.* FROM FOOD_RECIPE_BOARD
+		)
+		WHERE RN BETWEEN #{start} AND #{end}
+	</select>
+	
+	<!-- resulType : 쿼리 결과를 자바 객체에 매핑하기 위해 사용 -->
+	<select id="selectTotalCount" resultType="Integer">
+		SELECT COUNT(*) TOTAL_COUNT FROM FOOD_RECIPE_BOARD
+	</select>
+	<!-- 
+		#{start} : pagination 객체의 getStart()
+		#{end} : pagination 객체의 getEnd()
+	 -->
 
 
 

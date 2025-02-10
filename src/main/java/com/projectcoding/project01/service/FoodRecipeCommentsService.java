@@ -14,4 +14,5 @@ public interface FoodRecipeCommentsService {
 
     int deleteComments(int foodRecipeCommentsId, int foodRecipeBoardId);
 
+
 }

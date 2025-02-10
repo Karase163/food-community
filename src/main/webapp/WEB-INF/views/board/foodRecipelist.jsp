@@ -26,7 +26,7 @@ li {
 <body>
 	<h1>게시판</h1>
 	<!-- 글 작성 페이지 이동 버튼 -->
-	<a href="register"><input type="button" value="글 작성"></a>
+	<a href="foodReciperegister"><input type="button" value="글 작성"></a>
 	<hr>
 	<table>
 		<thead>
@@ -40,11 +40,11 @@ li {
 		<tbody>
 			<c:forEach var="FoodRecipeBoardVO" items="${foodRecipeboardList }">
 				<tr>
-					<td>${FoodRecipeBoardVO.foodRecipeboardId }</td>
-					<td><a href="detail?foodRecipeboardId=${FoodRecipeBoardVO.foodRecipeboardId }">
-					${FoodRecipeBoardVO.foodRecipeboardTitle }</a></td>
+					<td>${FoodRecipeBoardVO.foodRecipeBoardId }</td>
+					<td><a href="detail1?foodRecipeboardId=${FoodRecipeBoardVO.foodRecipeBoardId }">
+					${FoodRecipeBoardVO.foodRecipeBoardTitle }</a></td>
 					<td>${FoodRecipeBoardVO.memberId }</td>
-					<fmt:formatDate value="${FoodRecipeBoardVO.foodReicpeboardCreated }"
+					<fmt:formatDate value="${FoodRecipeBoardVO.foodRecipeBoardCreated }"
 						pattern="yyyy-MM-dd HH:mm:ss" var="foodReicpeboardCreated" />
 					<td>${foodReicpeboardCreated }</td>
 				</tr>
@@ -59,7 +59,7 @@ li {
 		<!-- 반복문으로 시작 번호부터 끝 번호까지 생성 -->
 		<c:forEach begin="${pageMaker.startNum }"
 			end="${pageMaker.endNum }" var="num">
-			<li><a href="list?pageNum=${num }">${num }</a></li>
+			<li><a href="foodRecipelist?pageNum=${num }">${num }</a></li>
 		</c:forEach>
 		<!-- 다음 버튼 생성을 위한 조건문 -->
 		<c:if test="${pageMaker.isNext() }">

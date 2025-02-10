@@ -17,6 +17,7 @@ public interface FoodRecipeBoardService {
 	int deleteBoard(int foodRecipeboardId);
 
 	List<FoodRecipeBoardVO> getPagingBoards(Pagination pagination);
-
+	
 	int getTotalCount();
 }
+

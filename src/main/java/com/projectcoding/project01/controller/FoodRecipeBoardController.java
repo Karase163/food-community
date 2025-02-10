@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.projectcoding.project01.domain.FoodRecipeBoardVO;
 import com.projectcoding.project01.service.FoodRecipeBoardService;
@@ -57,18 +58,20 @@ public class FoodRecipeBoardController {
     }
     
     // list.jsp에서 선택된 게시글 번호를 바탕으로 게시글 상세 조회
-    @GetMapping("/detail")
+    @GetMapping("/detail1")
     public void detail(Model model, Integer foodRecipeboardId) {
-        log.info("detail()");
+        log.info("detail1()");
         FoodRecipeBoardVO foodRecipeboardVO = foodRecipeboardService.getBoardById(foodRecipeboardId);
+        log.info(foodRecipeboardVO);
         model.addAttribute("foodRecipeBoardVO", foodRecipeboardVO);
     }
     
     // 게시글 번호를 전송받아 상세 게시글 조회
     @GetMapping("/foodRecipemodify")
-    public void foodRecipemodifyGET(Model model, Integer boardId) {
+    public void foodRecipemodifyGET(Model model, Integer foodRecipeBoardId) {
         log.info("foodRecipemodifyGET()");
-        FoodRecipeBoardVO foodRecipeboardVO = foodRecipeboardService.getBoardById(boardId);
+        FoodRecipeBoardVO foodRecipeboardVO = foodRecipeboardService.getBoardById(foodRecipeBoardId);
+        log.info(foodRecipeboardVO);
         model.addAttribute("foodRecipeBoardVO", foodRecipeboardVO);
     }   
     
@@ -76,6 +79,7 @@ public class FoodRecipeBoardController {
     @PostMapping("/foodRecipemodify")
     public String modifyPOST(FoodRecipeBoardVO foodRecipeboardVO) {
         log.info("foodRecipemodifyPOST");
+        log.info("수정된 게시글 정보 : " + foodRecipeboardVO);
         int result = foodRecipeboardService.updateBoard(foodRecipeboardVO);
         log.info("result : " + result);
         return "redirect:/board/foodRecipelist";
@@ -83,16 +87,19 @@ public class FoodRecipeBoardController {
     
     // detail.jsp에서 boardId를 전송받아 게시글 데이터 삭제
     @PostMapping("/delete")
-    public String delete(Integer boardId) {
-        log.info("delete()");
-        int result = foodRecipeboardService.deleteBoard(boardId);
-        log.info(result + "행 삭제");
-        return "redirect:/board/foodRecipelist";
-    }	
-    
-    // 상세 게시글 페이지 호출
-    @GetMapping("/detail1")
-    public void detail1() {
-        log.info("detail1()");
+    public String delete(@RequestParam("foodRecipeBoardId") Integer foodRecipeBoardId) {
+        try {
+            log.info("delete() - boardId = " + foodRecipeBoardId);
+            
+            // 게시글 삭제
+            int result = foodRecipeboardService.deleteBoard(foodRecipeBoardId);
+            log.info(result + "행 삭제");
+
+            // 삭제 후 게시글 목록으로 리다이렉트
+            return "redirect:/board/foodRecipelist";
+        } catch (Exception e) {
+            log.error("게시글 삭제 중 오류 발생: ", e);
+            return "redirect:/errorPage"; // 오류 처리 페이지로 리다이렉트
+        }
     }
 }

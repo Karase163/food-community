@@ -56,6 +56,7 @@
 		WHERE FOOD_RECIPE_BOARD_ID = #{foodRecipeBoardId}
 	</update>
 	
+	
 	<!-- <select>에 resultMap을 반드시 넣어줘야 한다.  -->
 	<select id="selectListByPagination" resultMap="foodRecipeBoardResultMap">
 		SELECT * FROM

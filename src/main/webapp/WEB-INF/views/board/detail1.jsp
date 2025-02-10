@@ -14,34 +14,36 @@
     <!-- 게시글 보기 -->
     <h2>글 보기</h2>
     <div>
-        <p>글 번호 : ${foodRecipeboardVO.foodRecipeBoardId }</p>
+        <p>글 번호 : ${foodRecipeBoardVO.foodRecipeBoardId}</p>
     </div>
     <div>
         <p>제목 : </p>
-        <p>${foodRecipeboardVO.foodRecipeBoardTitle }</p>
+        <p>${foodRecipeBoardVO.foodRecipeBoardTitle}</p> <!-- 제목 -->
     </div>
     <div>
-        <p>작성자 : ${foodRecipeboardVO.memberId }</p>
+        <p>작성자 : ${foodRecipeBoardVO.memberId}</p>
         
-        <fmt:formatDate value="${foodRecipeboardVO.foodRecipeBoardCreated }"
+        <fmt:formatDate value="${foodRecipeBoardVO.foodRecipeBoardCreated}"
                         pattern="yyyy-MM-dd HH:mm:ss" var="foodRecipeBoardCreated"/>
         <p>작성일 : ${foodRecipeBoardCreated }</p>
     </div>
     <div>
-        <textarea rows="20" cols="120" readonly>${foodRecipeboardVO.foodRecipeBoardContent }</textarea>
+        <textarea rows="20" cols="120" readonly>${foodRecipeBoardVO.foodRecipeBoardContent }</textarea>
     </div>
+
+    
 
     <!-- 게시글 관련 버튼 -->
     <button onclick="location.href='foodRecipelist'">글 목록</button>
-    <button onclick="location.href='modify?foodRecipeBoardId=${foodRecipeBoardVO.foodRecipeBoardId}'">글 수정</button>
-    <button id="deleteBoard">글 삭제</button>
+    <button onclick="location.href='foodRecipemodify?foodRecipeBoardId=${foodRecipeBoardVO.foodRecipeBoardId}'">글 수정</button>
+    <button id="deletefoodRecipeBoard">글 삭제</button>
     <form id="deleteForm" action="delete" method="POST">
         <input type="hidden" name="foodRecipeBoardId" value="${foodRecipeBoardVO.foodRecipeBoardId}">
     </form>
 
     <script type="text/javascript">
         $(document).ready(function(){
-            $('#deleteBoard').click(function(){a
+            $('#deletefoodRecipeBoard').click(function(){
                 if(confirm('삭제하시겠습니까?')){
                     $('#deleteForm').submit(); // form 데이터 전송
                 }
@@ -254,19 +256,20 @@
 
             // 답글 삭제 기능
             $('#foodRecipeComments').on('click', '.foodRecipeComments_item .replyItem .btn_reply_delete', function() {
-                var foodRecipeReplyId = $(this).closest('.replyItem').find('#foodRecipeReplyId').val();
+                var foodRecipeReplyId = $(this).closest('.replyItem').find('#foodRecipeReplyId').val();  // 답글 ID
+                var foodRecipeCommentsId = $(this).closest('.foodRecipeComments_item').find('#foodRecipeCommentsId').val();  // 댓글 ID 추가
 
                 $.ajax({
                     type: 'DELETE',
-                    url: '../foodRecipeReply/' + foodRecipeReplyId, 
+                    url: '../foodRecipeReply/' + foodRecipeReplyId + '/' + foodRecipeCommentsId,  // foodRecipeCommentsId도 URL에 추가
                     headers: {
                         'Content-Type': 'application/json'
                     },
                     success: function(result) {
                         if (result == 1) {
                             alert('답글 삭제 성공!');
-                            getRepliesForComments(foodRecipeReplyId);
-                        }
+                            getRepliesForComments(foodRecipeCommentsId);  // 댓글 ID를 사용해 답글 목록 갱신
+                        }    
                     }
                 });
             });

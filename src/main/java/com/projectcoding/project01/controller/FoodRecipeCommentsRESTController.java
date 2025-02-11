@@ -57,12 +57,15 @@ public class FoodRecipeCommentsRESTController {
 		return new ResponseEntity<Integer>(result, HttpStatus.OK);
 	}
 
-	@DeleteMapping("/{foodRecipeCommentsId}")
-	public ResponseEntity<Integer> deleteFoodRecipeComments(@PathVariable("foodRecipeCommentsId") int foodRecipeCommentsId) {
-	    log.info("deleteFoodRecipeComments()");
-	    log.info("foodRecipeCommentsId = " + foodRecipeCommentsId);
+	@DeleteMapping("/{foodRecipeCommentsId}/{foodRecipeBoardId}") // DELETE : 음식 레시피 댓글 삭제
+	public ResponseEntity<Integer> deletefoodRecipeComments(
+			@PathVariable("foodRecipeCommentsId") int foodRecipeCommentsId,
+			@PathVariable("foodRecipeBoardId") int foodRecipeBoardId) {
+		log.info("deletefoodRecipeComments()");
+		log.info("foodRecipeCommentsId = " + foodRecipeCommentsId);
+		log.info("foodRecipeBoardId = " + foodRecipeBoardId);
 
-		int result = foodRecipeCommentsService.deleteComments(foodRecipeCommentsId, foodRecipeCommentsId);
+		int result = foodRecipeCommentsService.deleteComments(foodRecipeCommentsId, foodRecipeBoardId);
 
 		return new ResponseEntity<Integer>(result, HttpStatus.OK);
 	}

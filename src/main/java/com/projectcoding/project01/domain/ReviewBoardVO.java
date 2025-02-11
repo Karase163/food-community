@@ -21,3 +21,4 @@ public class ReviewBoardVO {
 	private Date reviewBoardCreated;
 	private int reviewCommentsCount;
 }
+

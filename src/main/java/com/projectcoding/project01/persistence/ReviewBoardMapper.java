@@ -24,6 +24,8 @@ public interface ReviewBoardMapper {
 	int updateCommentsCount(@Param("reviewBoardId") int reviewBoardId, @Param("amount") int amount); // 댓글 수 변경
 	
 	List<ReviewBoardVO> selectListByPagination(Pagination pagination);
+	
 	int selectTotalCount();
 
 }
+

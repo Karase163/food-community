@@ -166,10 +166,11 @@
             // 댓글 삭제 기능
             $('#foodRecipeComments').on('click', '.foodRecipeComments_item .btn_delete', function(){
                 var foodRecipeCommentsId = $(this).prevAll('#foodRecipeCommentsId').val(); 
+                var foodRecipeBoardId = $('#foodRecipeBoardId').val(); // foodRecipeBoardId 값 가져오기 (필요한 경우)
 
                 $.ajax({
                     type : 'DELETE', 
-                    url : '../foodRecipeComments/' + foodRecipeCommentsId, 
+                    url : '../foodRecipeComments/' + foodRecipeCommentsId + '/' + foodRecipeBoardId,
                     headers : {
                         'Content-Type' : 'application/json'
                     },

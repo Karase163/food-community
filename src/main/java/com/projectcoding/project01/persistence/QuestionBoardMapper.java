@@ -24,5 +24,6 @@ public interface QuestionBoardMapper {
 	int updateCommentsCount(@Param("questionBoardId") int questionBoardId, @Param("amount") int amount); // 댓글 수 변경
 
 	List<QuestionBoardVO> selectListByPagination(Pagination pagination);
+	
 	int selectTotalCount();
 }

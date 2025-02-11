@@ -18,7 +18,7 @@ import com.projectcoding.project01.util.Pagination;
 import lombok.extern.log4j.Log4j;
 
 @Controller
-@RequestMapping(value="/board")
+@RequestMapping(value="/foodRecipeboard")
 @Log4j
 public class FoodRecipeBoardController {
     
@@ -54,7 +54,7 @@ public class FoodRecipeBoardController {
         log.info("foodRecipeBoardVO : " + foodRecipeboardVO);
         int result = foodRecipeboardService.createBoard(foodRecipeboardVO);
         log.info(result + "행 등록");
-        return "redirect:/board/foodRecipelist";
+        return "redirect:/foodRecipeboard/foodRecipelist";
     }
     
     // list.jsp에서 선택된 게시글 번호를 바탕으로 게시글 상세 조회
@@ -82,11 +82,11 @@ public class FoodRecipeBoardController {
         log.info("수정된 게시글 정보 : " + foodRecipeboardVO);
         int result = foodRecipeboardService.updateBoard(foodRecipeboardVO);
         log.info("result : " + result);
-        return "redirect:/board/foodRecipelist";
+        return "redirect:/foodRecipeboard/foodRecipelist";
     }
     
     // detail.jsp에서 boardId를 전송받아 게시글 데이터 삭제
-    @PostMapping("/delete")
+    @PostMapping("/foodRecipeBoard/delete")
     public String delete(@RequestParam("foodRecipeBoardId") Integer foodRecipeBoardId) {
         try {
             log.info("delete() - boardId = " + foodRecipeBoardId);
@@ -96,7 +96,7 @@ public class FoodRecipeBoardController {
             log.info(result + "행 삭제");
 
             // 삭제 후 게시글 목록으로 리다이렉트
-            return "redirect:/board/foodRecipelist";
+            return "redirect:/foodRecipeboard/foodRecipelist";
         } catch (Exception e) {
             log.error("게시글 삭제 중 오류 발생: ", e);
             return "redirect:/errorPage"; // 오류 처리 페이지로 리다이렉트

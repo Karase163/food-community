@@ -14,5 +14,7 @@ public interface ReviewCommentsService {
     int updateComments(int reviewCommentsId, String reviewCommentsContent); 
 
     int deleteComments(int reviewCommentsId, int reviewBoardId);
+	
+
 
 }

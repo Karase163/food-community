@@ -37,7 +37,7 @@
     <button onclick="location.href='foodRecipelist'">글 목록</button>
     <button onclick="location.href='foodRecipemodify?foodRecipeBoardId=${foodRecipeBoardVO.foodRecipeBoardId}'">글 수정</button>
     <button id="deletefoodRecipeBoard">글 삭제</button>
-    <form id="deleteForm" action="delete" method="POST">
+    <form id="deleteForm" action="project1/detial1/foodRecipeboard/delete" method="POST">
         <input type="hidden" name="foodRecipeBoardId" value="${foodRecipeBoardVO.foodRecipeBoardId}">
     </form>
 
@@ -186,7 +186,7 @@
             // 답글 작성 기능
             $('#foodRecipeComments').on('click', '.foodRecipeComments_item .btn_reply', function() {
                 var foodRecipeCommentsId = $(this).closest('.foodRecipeComments_item').find('#foodRecipeCommentsId').val();
-                var memberId = 'test'; 
+                var memberId = 'soraru'; 
                 var foodRecipeReplyContent = prompt("답글을 입력하세요: ");
 
                 if (foodRecipeReplyContent) {

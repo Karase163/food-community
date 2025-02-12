@@ -8,11 +8,11 @@
 </head>
 <body>
    <h2>글 작성 페이지</h2>
-   <form action="reviewregister" method="POST">
+   <form action="questionregister" method="POST">
    <!-- input 태그의 name은 vo의 멤버 변수 이름과 동일하게 작성 -->
       <div>
          <p>제목 : </p>
-         <input type="text" name="reviewBoardTitle" 
+         <input type="text" name="questionBoardTitle" 
          placeholder="제목 입력" maxlength="30" required>
       </div>
       <div>
@@ -21,7 +21,7 @@
       </div>
       <div>
          <p>내용 : </p>
-         <textarea rows="20" cols="120" name="reviewBoardContent" 
+         <textarea rows="20" cols="120" name="questionBoardContent" 
          placeholder="내용 입력" maxlength="500" required></textarea>
       </div>
       <div>

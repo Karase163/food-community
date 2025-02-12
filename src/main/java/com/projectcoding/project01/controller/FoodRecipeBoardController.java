@@ -86,7 +86,7 @@ public class FoodRecipeBoardController {
     }
     
     // detail.jsp에서 boardId를 전송받아 게시글 데이터 삭제
-    @PostMapping("/foodRecipeBoard/delete")
+    @PostMapping("/project1/detial1/foodRecipeboard/delete")
     public String delete(@RequestParam("foodRecipeBoardId") Integer foodRecipeBoardId) {
         try {
             log.info("delete() - boardId = " + foodRecipeBoardId);

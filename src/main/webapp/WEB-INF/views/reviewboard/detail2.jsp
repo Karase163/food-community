@@ -37,7 +37,7 @@
     <button onclick="location.href='reviewlist'">글 목록</button>
     <button onclick="location.href='reviewmodify?reviewBoardId=${reviewBoardVO.reviewBoardId}'">글 수정</button>
     <button id="deletereviewBoard">글 삭제</button>
-    <form id="deleteForm" action="delete" method="POST">
+    <form id="deleteForm" action="project1/detial2/reviewboard/delete" method="POST">
         <input type="hidden" name="reviewBoardId" value="${reviewBoardVO.reviewBoardId}">
     </form>
 
@@ -53,6 +53,7 @@
 
     <!-- 댓글 및 답글 관련 코드 -->
     <input type="hidden" id="reviewBoardId" value="${reviewBoardVO.reviewBoardId}">
+    
 
     <h3>댓글 추가</h3>
     <div style="text-align: center;">
@@ -68,7 +69,7 @@
 
     <script type="text/javascript">
         $(document).ready(function(){
-            getAllreviewComments(); // 댓글 목록 가져오기
+            getAllReviewComments(); // 댓글 목록 가져오기
 
             // 댓글 작성 기능
             $('#btnAdd').click(function(){

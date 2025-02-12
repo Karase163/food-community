@@ -25,7 +25,7 @@ public class ReviewBoardController {
     @Autowired
     private ReviewBoardService reviewboardService;
     
-    // 전체 게시글 데이터를 reviewlist.jsp 페이지로 전송
+    // 전체 게시글 데이터를 foodRecipelist.jsp 페이지로 전송
     @GetMapping("/reviewlist")
     public void list(Model model, Pagination pagination) {
         log.info("reviewlist()");
@@ -69,7 +69,7 @@ public class ReviewBoardController {
     // 게시글 번호를 전송받아 상세 게시글 조회
     @GetMapping("/reviewmodify")
     public void reviewmodifyGET(Model model, Integer reviewBoardId) {
-        log.info("reviewemodifyGET()");
+        log.info("reviewmodifyGET()");
         ReviewBoardVO reviewboardVO = reviewboardService.getBoardById(reviewBoardId);
         log.info(reviewboardVO);
         model.addAttribute("reviewBoardVO", reviewboardVO);
@@ -86,7 +86,7 @@ public class ReviewBoardController {
     }
     
     // detail.jsp에서 boardId를 전송받아 게시글 데이터 삭제
-    @PostMapping("/reviewBoard/delete")
+    @PostMapping("/project1/detial2/reviewboard/delete")
     public String delete(@RequestParam("reviewBoardId") Integer reviewBoardId) {
         try {
             log.info("delete() - boardId = " + reviewBoardId);

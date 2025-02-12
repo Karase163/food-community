@@ -21,3 +21,5 @@ public class QuestionBoardVO {
     private Date questionBoardCreated;
     private int questionCommentsCount;
 }
+
+

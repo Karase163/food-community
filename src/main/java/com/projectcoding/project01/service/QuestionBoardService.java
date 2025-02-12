@@ -20,3 +20,5 @@ public interface QuestionBoardService {
 
 	int getTotalCount();
 }
+
+

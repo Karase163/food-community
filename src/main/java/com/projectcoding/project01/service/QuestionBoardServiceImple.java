@@ -16,49 +16,49 @@ import lombok.extern.log4j.Log4j;
 public class QuestionBoardServiceImple implements QuestionBoardService{
    
    @Autowired
-   private QuestionBoardMapper boardMapper;
+   private QuestionBoardMapper questionboardMapper;
 
    @Override
    public int createBoard(QuestionBoardVO questionboardVO) {
       log.info("createBoard()");
-      int result = boardMapper.insert(questionboardVO);
+      int result = questionboardMapper.insert(questionboardVO);
       return result;
    }
 
    @Override
    public List<QuestionBoardVO> getAllBoards() {
       log.info("getAllBoards()");
-      return boardMapper.selectList();
+      return questionboardMapper.selectList();
    }
 
    @Override
    public QuestionBoardVO getBoardById(int questionboardId) {
       log.info("getBoardById()");
-      return boardMapper.selectOne(questionboardId);
+      return questionboardMapper.selectOne(questionboardId);
    }
 
    @Override
    public int updateBoard(QuestionBoardVO questionboardVO) {
       log.info("updateBoard()");
-      return boardMapper.update(questionboardVO);
+      return questionboardMapper.update(questionboardVO);
    }
 
    @Override
    public int deleteBoard(int questionboardId) {
       log.info("deleteBoard()");
-      return boardMapper.delete(questionboardId);
+      return questionboardMapper.delete(questionboardId);
    }
 
    @Override
    public List<QuestionBoardVO> getPagingBoards(Pagination pagination) {
       log.info("getPagingBoards()");
-      return boardMapper.selectListByPagination(pagination);
+      return questionboardMapper.selectListByPagination(pagination);
    }
 
    @Override
    public int getTotalCount() {
       log.info("getTotalCount()");
-      return boardMapper.selectTotalCount();
+      return questionboardMapper.selectTotalCount();
    }
 
 }

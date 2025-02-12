@@ -42,7 +42,7 @@
 		UPDATE QUESTION_BOARD 
 		SET QUESTION_BOARD_TITLE = #{questionBoardTitle}, QUESTION_BOARD_CONTENT = #{questionBoardContent}, 
 			QUESTION_BOARD_CREATED = SYSDATE
-		WHERE QUESTIONE_BOARD_ID = #{questionBoardId}
+		WHERE QUESTION_BOARD_ID = #{questionBoardId}
 	</update>
 
 	<delete id="delete">
@@ -55,7 +55,23 @@
 		SET QUESTION_COMMENTS_COUNT = QUESTION_COMMENTS_COUNT + #{amount}
 		WHERE QUESTION_BOARD_ID = #{questionBoardId}
 	</update>
-
-
+	<!-- <select>에 resultMap을 반드시 넣어줘야 한다.  -->
+	<select id="selectListByPagination" resultMap="questionBoardResultMap">
+		SELECT * FROM
+		(
+			SELECT ROW_NUMBER() OVER(ORDER BY Question_BOARD_ID DESC)
+			AS RN, Question_BOARD.* FROM Question_BOARD
+		)
+		WHERE RN BETWEEN #{start} AND #{end}
+	</select>
+	
+	<!-- resulType : 쿼리 결과를 자바 객체에 매핑하기 위해 사용 -->
+	<select id="selectTotalCount" resultType="Integer">
+		SELECT COUNT(*) TOTAL_COUNT FROM Review_BOARD
+	</select>
+	<!-- 
+		#{start} : pagination 객체의 getStart()
+		#{end} : pagination 객체의 getEnd()
+	 -->
 
 </mapper>

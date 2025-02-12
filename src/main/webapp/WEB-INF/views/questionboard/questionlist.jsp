@@ -26,7 +26,7 @@ li {
 <body>
 	<h1>게시판</h1>
 	<!-- 글 작성 페이지 이동 버튼 -->
-	<a href="reviewregister"><input type="button" value="글 작성"></a>
+	<a href="questionregister"><input type="button" value="글 작성"></a>
 	<hr>
 	<table>
 		<thead>
@@ -38,15 +38,15 @@ li {
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="ReviewBoardVO" items="${reviewboardList }">
+			<c:forEach var="QuestionBoardVO" items="${questionboardList }">
 				<tr>
-					<td>${ReviewBoardVO.reviewBoardId }</td>
-					<td><a href="detail2?reviewboardId=${ReviewBoardVO.reviewBoardId }">
-					${ReviewBoardVO.reviewBoardTitle }</a></td>
-					<td>${ReviewBoardVO.memberId }</td>
-					<fmt:formatDate value="${ReviewBoardVO.reviewBoardCreated }"
-						pattern="yyyy-MM-dd HH:mm:ss" var="reviewboardCreated" />
-					<td>${reviewboardCreated }</td>
+					<td>${QuestionBoardVO.questionBoardId }</td>
+					<td><a href="detail3?questionboardId=${QuestionBoardVO.questionBoardId }">
+					${QuestionBoardVO.questionBoardTitle }</a></td>
+					<td>${QuestionBoardVO.memberId }</td>
+					<fmt:formatDate value="${QuestionBoardVO.questionBoardCreated }"
+						pattern="yyyy-MM-dd HH:mm:ss" var="questionboardCreated" />
+					<td>${questionboardCreated }</td>
 				</tr>
 			</c:forEach>
 		</tbody>
@@ -59,7 +59,7 @@ li {
 		<!-- 반복문으로 시작 번호부터 끝 번호까지 생성 -->
 		<c:forEach begin="${pageMaker.startNum }"
 			end="${pageMaker.endNum }" var="num">
-			<li><a href="reviewlist?pageNum=${num }">${num }</a></li>
+			<li><a href="questionlist?pageNum=${num }">${num }</a></li>
 		</c:forEach>
 		<!-- 다음 버튼 생성을 위한 조건문 -->
 		<c:if test="${pageMaker.isNext() }">

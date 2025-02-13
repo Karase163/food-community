@@ -26,7 +26,7 @@ li {
 <body>
 	<h1>게시판</h1>
 	<!-- 글 작성 페이지 이동 버튼 -->
-	<a href="questionregister"><input type="button" value="글 작성"></a>
+	<a href="questionregister"><input type="button" value="게시글 작성"></a>
 	<hr>
 	<table>
 		<thead>

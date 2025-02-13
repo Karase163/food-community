@@ -12,7 +12,7 @@
 <body>
 
     <!-- 게시글 보기 -->
-    <h2>글 보기</h2>
+    <h2>게시글 보기</h2>
     <div>
         <p>글 번호 : ${foodRecipeBoardVO.foodRecipeBoardId}</p>
     </div>
@@ -34,9 +34,9 @@
     
 
     <!-- 게시글 관련 버튼 -->
-    <button onclick="location.href='foodRecipelist'">글 목록</button>
-    <button onclick="location.href='foodRecipemodify?foodRecipeBoardId=${foodRecipeBoardVO.foodRecipeBoardId}'">글 수정</button>
-    <button id="deletefoodRecipeBoard">글 삭제</button>
+    <button onclick="location.href='foodRecipelist'">게시판</button>
+    <button onclick="location.href='foodRecipemodify?foodRecipeBoardId=${foodRecipeBoardVO.foodRecipeBoardId}'">게시글 수정</button>
+    <button id="deletefoodRecipeBoard">게시글 삭제</button>
     <form id="deleteForm" action="project1/detial1/foodRecipeboard/delete" method="POST">
         <input type="hidden" name="foodRecipeBoardId" value="${foodRecipeBoardVO.foodRecipeBoardId}">
     </form>

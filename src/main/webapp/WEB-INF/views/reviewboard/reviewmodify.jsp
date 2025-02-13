@@ -6,7 +6,7 @@
     <title>${reviewBoardVO.reviewBoardTitle}</title>
 </head>
 <body>
-    <h2>글 수정 페이지</h2>
+    <h2>게시글 수정 페이지</h2>
     <form action="reviewmodify" method="POST">
         <div>
             <p>번호 : </p>

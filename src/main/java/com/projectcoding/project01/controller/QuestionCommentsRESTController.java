@@ -57,12 +57,14 @@ public class QuestionCommentsRESTController {
 	}
 
 	@DeleteMapping("/{questionCommentsId}/{questionBoardId}") // DELETE : 음식 레시피 댓글 삭제
-	public ResponseEntity<Integer> deleteReply(@PathVariable("questionCommentsId") int questionCommentsId,
+	public ResponseEntity<Integer> deletequestionComments(
+			@PathVariable("questionCommentsId") int questionCommentsId,
 			@PathVariable("questionBoardId") int questionBoardId) {
-		log.info("deleteQuestionComments()");
+		log.info("deletequestionComments()");
 		log.info("questionCommentsId = " + questionCommentsId);
+		log.info("questioneBoardId = " + questionBoardId);
 
-		int result = questionCommentsService.deleteComments(questionCommentsId, questionCommentsId);
+		int result = questionCommentsService.deleteComments(questionCommentsId, questionBoardId);
 
 		return new ResponseEntity<Integer>(result, HttpStatus.OK);
 	}

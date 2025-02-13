@@ -7,7 +7,7 @@
 <title>글 작성 페이지</title>
 </head>
 <body>
-   <h2>글 작성 페이지</h2>
+   <h2>게시글 작성 페이지</h2>
    <form action="reviewregister" method="POST">
    <!-- input 태그의 name은 vo의 멤버 변수 이름과 동일하게 작성 -->
       <div>

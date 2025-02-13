@@ -12,7 +12,7 @@
 <body>
 
     <!-- 게시글 보기 -->
-    <h2>글 보기</h2>
+    <h2>게시글 보기</h2>
     <div>
         <p>글 번호 : ${reviewBoardVO.reviewBoardId}</p>
     </div>
@@ -34,9 +34,9 @@
     
 
     <!-- 게시글 관련 버튼 -->
-    <button onclick="location.href='reviewlist'">글 목록</button>
-    <button onclick="location.href='reviewmodify?reviewBoardId=${reviewBoardVO.reviewBoardId}'">글 수정</button>
-    <button id="deletereviewBoard">글 삭제</button>
+    <button onclick="location.href='reviewlist'">게시판</button>
+    <button onclick="location.href='reviewmodify?reviewBoardId=${reviewBoardVO.reviewBoardId}'">게시글 수정</button>
+    <button id="deletereviewBoard">게시글 삭제</button>
     <form id="deleteForm" action="project1/detial2/reviewboard/delete" method="POST">
         <input type="hidden" name="reviewBoardId" value="${reviewBoardVO.reviewBoardId}">
     </form>

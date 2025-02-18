@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.projectcoding.project01.persistence.FoodRecipeAttachMapper">
+
+	<resultMap type="com.projectcoding.project01.domain.FoodRecipeAttach"
+		id="foodRecipeAttachResultMap">
+		
+		<id property="foodRecipeAttachId" column="FOOD_RECIPE_ATTACH_ID" /> 
+		<result property="foodRecipeBoardId" column="FOOD_RECIPE_BOARD_ID" />
+		<result property="foodRecipeAttachPath" column="FOOD_RECIPE_ATTACH_PATH" />
+		<result property="foodRecipeAttachRealName" column="FOOD_RECIPE_ATTACH_REAL_NAME" />
+		<result property="foodRecipeAttachChgName" column="FOOD_RECIPE_ATTACH_CHG_NAME" />
+		<result property="foodRecipeAttachExtension" column="FOOD_RECIPE_ATTACH_EXTENSION"/>
+		<result property="foodRecipeAttachCreated" column="FOOD_RECIPE_ATTACH_DATE_CREATED"/>
+	</resultMap>
+
+	<insert id="insert">
+		INSERT INTO FOOD_RECIPE_ATTACH 
+		(FOOD_RECIPE_ATTACH_ID, FOOD_RECIPE_BOARD_ID, FOOD_RECIPE_ATTACH_PATH, FOOD_RECIPE_ATTACH_REAL_NAME, FOOD_RECIPE_ATTACH_CHG_NAME, FOOD_RECIPE_ATTACH_EXTENSION)
+		VALUES (ATTACH_SEQ.NEXTVAL, BOARD_SEQ.CURRVAL, #{foodRecipeAttachPath}, #{foodRecipeAttachRealName}, #{foodRecipeAttachChgName}, #{foodRecipeAttachExtension})
+	</insert>
+
+	
+	<select id="selectByBoardId" resultMap="foodRecipeAttachResultMap">
+		SELECT * FROM FOOD_RECIPE_ATTACH
+		WHERE FOOD_RECIPE_BOARD_ID = #{foodRecipeBoardId}
+	</select>
+	
+	<select id="selectByAttachId" resultMap="foodRecipeAttachResultMap">
+		SELECT * FROM FOOD_RECIPE_ATTACH 
+		WHERE FOOD_RECIPE_ATTACH_ID = #{foodRecipeAttachId}
+	</select>
+	
+	<insert id="insertModify">
+		INSERT INTO FOOD_REICPE_ATTACH 
+		(FOOD_REICPE_ATTACH_ID, FOOD_REICPE_BOARD_ID, FOOD_REICPE_ATTACH_PATH, FOOD_REICPE_ATTACH_REAL_NAME, FOOD_REICPE_ATTACH_CHG_NAME, FOOD_REICPE_ATTACH_EXTENSION)
+		VALUES (ATTACH_SEQ.NEXTVAL, #{foodRecipeBoardId}, #{foodReciepAttachPath}, #{foodReciepAttachRealName}, #{foodReciepAttachChgName}, #{foodReciepAttachExtension})
+	</insert>
+
+	<delete id="delete">
+		DELETE FROM FOOD_RECIPE_ATTACH
+		WHERE FOOD_BOARD_ID = #{foodRecipeBoardId}
+	</delete>
+	
+	<select id="selectOldList" resultMap="foodRecipeAttachResultMap">
+		SELECT * FROM FOOD_RECIPE_ATTACH
+		WHERE FOOD_RECIPE_ATTACH_PATH = TO_CHAR(SYSDATE -1, 'yyyy\mm\dd')
+	</select>
+	
+
+</mapper>

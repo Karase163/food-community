@@ -24,6 +24,14 @@ public class FoodRecipeBoardController {
     
     @Autowired
     private FoodRecipeBoardService foodRecipeboardService;
+
+    // FoodRecipe 게시판 페이지 처리
+    @RequestMapping("/foodRecipelist")
+    public String foodRecipelist(Model model) {
+        // 게시판 관련 데이터를 model에 추가하거나
+        // 뷰를 반환하는 로직
+        return "foodRecipelist";  // foodRecipelist.jsp 페이지 반환
+    }
     
     // 전체 게시글 데이터를 foodRecipelist.jsp 페이지로 전송
     @GetMapping("/foodRecipelist")

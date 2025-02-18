@@ -4,7 +4,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <!-- jquery 라이브러리 import -->
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <meta charset="UTF-8">
     <title>${foodRecipeBoardVO.foodRecipeBoardTitle }</title>
@@ -18,20 +17,17 @@
     </div>
     <div>
         <p>제목 : </p>
-        <p>${foodRecipeBoardVO.foodRecipeBoardTitle}</p> <!-- 제목 -->
+        <p>${foodRecipeBoardVO.foodRecipeBoardTitle}</p>
     </div>
     <div>
         <p>작성자 : ${foodRecipeBoardVO.memberId}</p>
         
-        <fmt:formatDate value="${foodRecipeBoardVO.foodRecipeBoardCreated}"
-                        pattern="yyyy-MM-dd HH:mm:ss" var="foodRecipeBoardCreated"/>
+        <fmt:formatDate value="${foodRecipeBoardVO.foodRecipeBoardCreated}" pattern="yyyy-MM-dd HH:mm:ss" var="foodRecipeBoardCreated"/>
         <p>작성일 : ${foodRecipeBoardCreated }</p>
     </div>
     <div>
         <textarea rows="20" cols="120" readonly>${foodRecipeBoardVO.foodRecipeBoardContent }</textarea>
     </div>
-
-    
 
     <!-- 게시글 관련 버튼 -->
     <button onclick="location.href='foodRecipelist'">게시판</button>
@@ -141,140 +137,41 @@
                     }
                 ); 
             }
-
-            // 댓글 수정 기능
-            $('#foodRecipeComments').on('click', '.foodRecipeComments_item .btn_update', function(){
-                var foodRecipeCommentsId = $(this).prevAll('#foodRecipeCommentsId').val(); 
-                var foodRecipeCommentsContent = $(this).prevAll('#foodRecipeCommentsContent').val(); 
-
-                $.ajax({
-                    type : 'PUT', 
-                    url : '../foodRecipeComments/' + foodRecipeCommentsId,
-                    headers : {
-                        'Content-Type' : 'application/json'
-                    },
-                    data : foodRecipeCommentsContent, 
-                    success : function(result) {
-                        if(result == 1) {
-                            alert('댓글 수정 성공!');
-                            getAllFoodRecipeComments();
-                        }
-                    }
-                });
-            }); 
-            
-            // 댓글 삭제 기능
-            $('#foodRecipeComments').on('click', '.foodRecipeComments_item .btn_delete', function(){
-                var foodRecipeCommentsId = $(this).prevAll('#foodRecipeCommentsId').val(); 
-                var foodRecipeBoardId = $('#foodRecipeBoardId').val(); // foodRecipeBoardId 값 가져오기 (필요한 경우)
-
-                $.ajax({
-                    type : 'DELETE', 
-                    url : '../foodRecipeComments/' + foodRecipeCommentsId + '/' + foodRecipeBoardId,
-                    headers : {
-                        'Content-Type' : 'application/json'
-                    },
-                    success : function(result) {
-                        if(result == 1) {
-                            alert('댓글 삭제 성공!');
-                            getAllFoodRecipeComments();
-                        }
-                    }
-                });
-            }); 
-
-            // 답글 작성 기능
-            $('#foodRecipeComments').on('click', '.foodRecipeComments_item .btn_reply', function() {
-                var foodRecipeCommentsId = $(this).closest('.foodRecipeComments_item').find('#foodRecipeCommentsId').val();
-                var memberId = 'soraru'; 
-                var foodRecipeReplyContent = prompt("답글을 입력하세요: ");
-
-                if (foodRecipeReplyContent) {
-                    var replyObj = {
-                        'foodRecipeCommentsId': foodRecipeCommentsId,
-                        'memberId': memberId,
-                        'foodRecipeReplyContent': foodRecipeReplyContent
-                    };
-
-                    $.ajax({
-                        type: 'POST',
-                        url: '../foodRecipeReply', 
-                        headers: {
-                            'Content-Type': 'application/json' 
-                        },
-                        data: JSON.stringify(replyObj), 
-                        success: function(result) {
-                            if (result == 1) {
-                                alert('답글 작성 성공!');
-                                getRepliesForComments(foodRecipeCommentsId); 
-                            }
-                        }
-                    });
-                }
-            });
-
-            // 선택된 댓글에 대한 답글 목록을 가져오는 함수
-            function getRepliesForComments(foodRecipeCommentsId) {
-                $.getJSON('../foodRecipeReply/all/' + foodRecipeCommentsId, function(replies) {
-                    var replyList = '';
-                    $.each(replies, function(index, reply) {
-                        replyList += '<div class="replyItem">'
-                            + '<p>' + reply.memberId + ': ' + reply.foodRecipeReplyContent + '</p>'
-                            + '<button class="btn_reply_update">수정</button>'
-                            + '<button class="btn_reply_delete">삭제</button>'
-                            + '<input type="hidden" id="foodRecipeReplyId" value="' + reply.foodRecipeReplyId + '">'
-                            + '</div>';
-                    });
-                    $('#foodRecipeComments').find('#foodRecipeCommentsId[value="' + foodRecipeCommentsId + '"]')
-                        .closest('.foodRecipeComments_item')
-                        .find('.replies')
-                        .html(replyList); 
-                });
-            }
-
-            // 답글 수정 기능
-            $('#foodRecipeComments').on('click', '.foodRecipeComments_item .replyItem .btn_reply_update', function() {
-                var foodRecipeReplyId = $(this).closest('.replyItem').find('#foodRecipeReplyId').val();
-                var foodRecipeReplyContent = prompt("답글을 수정하세요: ", $(this).closest('.replyItem').find('p').text());
-
-                if (foodRecipeReplyContent) {
-                    $.ajax({
-                        type: 'PUT',
-                        url: '../foodRecipeReply/' + foodRecipeReplyId, 
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        data: foodRecipeReplyContent, 
-                        success: function(result) {
-                            if (result == 1) {
-                                alert('답글 수정 성공!');
-                                getRepliesForComments(foodRecipeReplyId); 
-                            }
-                        }
-                    });
-                }
-            });
-
-            // 답글 삭제 기능
-            $('#foodRecipeComments').on('click', '.foodRecipeComments_item .replyItem .btn_reply_delete', function() {
-                var foodRecipeReplyId = $(this).closest('.replyItem').find('#foodRecipeReplyId').val();  // 답글 ID
-                var foodRecipeCommentsId = $(this).closest('.foodRecipeComments_item').find('#foodRecipeCommentsId').val();  // 댓글 ID 추가
-
-                $.ajax({
-                    type: 'DELETE',
-                    url: '../foodRecipeReply/' + foodRecipeReplyId + '/' + foodRecipeCommentsId,  // foodRecipeCommentsId도 URL에 추가
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    success: function(result) {
-                        if (result == 1) {
-                            alert('답글 삭제 성공!');
-                            getRepliesForComments(foodRecipeCommentsId);  // 댓글 ID를 사용해 답글 목록 갱신
-                        }    
-                    }
-                });
-            });
         });
     </script>
+
+    <!-- 이미지 및 첨부 파일 영역 -->
+    <div class="file-upload">
+        <div class="file-view">
+            <h2>파일 리스트</h2>
+            <div class="file-list">
+                <c:forEach var="foodRecipeAttachDTO" items="${foodRecipeboardVO.foodRecipeAttachList}">
+                    <!-- 이미지 파일 처리 -->
+                    <c:if test="${foodRecipeAttachDTO.foodRecipeAttachExtension eq 'jpg' or 
+                                 foodRecipeAttachDTO.foodRecipeAttachExtension eq 'jpeg' or 
+                                 foodRecipeAttachDTO.foodRecipeAttachExtension eq 'png' or 
+                                 foodRecipeAttachDTO.foodRecipeAttachExtension eq 'gif'}">
+                        <div class="image_item">
+                            <a href="../image/get?foodRecipeAttachId=${foodRecipeAttachDTO.foodRecipeAttachId }" target="_blank">
+                                <img width="100px" height="100px" 
+                                     src="../image/get?foodRecipeAttachId=${foodRecipeAttachDTO.foodRecipeAttachId }&foodRecipeAttachExtension=${foodRecipeAttachDTO.foodRecipeAttachExtension}"/>
+                            </a>
+                        </div>
+                    </c:if>
+
+                    <!-- 일반 첨부 파일 처리 -->
+                    <c:if test="${not (foodRecipeAttachDTO.foodRecipeAttachExtension eq 'jpg' or 
+                                       foodRecipeAttachDTO.foodRecipeAttachExtension eq 'jpeg' or 
+                                       foodRecipeAttachDTO.foodRecipeAttachExtension eq 'png' or 
+                                       foodRecipeAttachDTO.foodRecipeAttachExtension eq 'gif')}">
+                        <div class="foodRecipeAttach_item">
+                            <p><a href="../foodRecipeAttach/download?foodRecipeAttachId=${foodRecipeAttachDTO.foodRecipeAttachId }">${foodRecipeAttachDTO.foodRecipeAttachRealName }.${foodRecipeAttachDTO.foodRecipeAttachExtension }</a></p>
+                        </div>
+                    </c:if>
+                </c:forEach>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
